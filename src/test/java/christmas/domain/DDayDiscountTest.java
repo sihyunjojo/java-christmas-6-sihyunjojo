@@ -17,8 +17,10 @@ class DDayDiscountTest {
     @ValueSource(ints = {1, 25})
     @ParameterizedTest
     void testValidInputCreateDDayDiscount(int day) {
+        LocalDate inputDate = LocalDate.of(2023, 12, day);
+
         Assertions.assertEquals(DDayDiscount.createDDayDiscount(day),
-                new DDayDiscount(day));
+                new DDayDiscount(inputDate));
     }
 
     @DisplayName("부적절한 날(day)이 들어오면 예외를 발생시켜준다.")

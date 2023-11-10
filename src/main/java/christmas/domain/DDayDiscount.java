@@ -2,19 +2,22 @@ package christmas.domain;
 
 import static christmas.domain.DDayDisCountPrice.*;
 
+import christmas.validator.DateValidator;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class DDayDiscount {
     private final DDayDisCountPrice currentDiscountPrice;
 
-    public DDayDiscount(int currentDay) {
-        LocalDate currentDate = LocalDate.of(2023, 12, currentDay);
+    public DDayDiscount(LocalDate currentDate) {
         this.currentDiscountPrice = createDDayDisCountPrice(currentDate);
     }
 
     public static DDayDiscount createDDayDiscount(int currentDay){
-        return new DDayDiscount(currentDay);
+        LocalDate currentDate = LocalDate.of(2023, 12, currentDay);
+        DateValidator.validateDDayDisCountPeriod(currentDate);
+
+        return new DDayDiscount(currentDate);
     }
 
     public int discountAllOrderPrice(int allOrderPrice) {
