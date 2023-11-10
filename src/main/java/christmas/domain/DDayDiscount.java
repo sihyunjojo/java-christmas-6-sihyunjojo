@@ -3,11 +3,12 @@ package christmas.domain;
 import static christmas.domain.DDayDisCountPrice.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class DDayDiscount {
     private final DDayDisCountPrice currentDiscountPrice;
 
-    private DDayDiscount(int currentDay) {
+    public DDayDiscount(int currentDay) {
         LocalDate currentDate = LocalDate.of(2023, 12, currentDay);
         this.currentDiscountPrice = createDDayDisCountPrice(currentDate);
     }
@@ -17,7 +18,24 @@ public class DDayDiscount {
     }
 
     public int getCurrentDiscountPrice() {
-        return currentDiscountPrice.getDiscountPrice();
+        return currentDiscountPrice.discountPrice();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DDayDiscount that = (DDayDiscount) o;
+        return Objects.equals(currentDiscountPrice, that.currentDiscountPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentDiscountPrice);
     }
 }
 

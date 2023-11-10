@@ -5,14 +5,8 @@ import static christmas.global.DiscountDateConstants.*;
 
 import christmas.validator.DateValidator;
 import java.time.LocalDate;
-import java.util.Objects;
 
-public class DDayDisCountPrice {
-    private final int discountPrice;
-
-    public DDayDisCountPrice(int discountPrice) {
-        this.discountPrice = discountPrice;
-    }
+public record DDayDisCountPrice(int discountPrice) {
 
     public static DDayDisCountPrice createDDayDisCountPrice(LocalDate currentDate) {
         return new DDayDisCountPrice(updateDDayDisCountPrice(currentDate));
@@ -27,24 +21,4 @@ public class DDayDisCountPrice {
                 + (DISCOUNT_PRICE_INCREASE_PER_DAY * plusDay);
     }
 
-    public int getDiscountPrice() {
-        return discountPrice;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        DDayDisCountPrice that = (DDayDisCountPrice) o;
-        return discountPrice == that.discountPrice;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(discountPrice);
-    }
 }
