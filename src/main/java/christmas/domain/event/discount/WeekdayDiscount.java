@@ -4,6 +4,8 @@ import static christmas.global.DisCountPriceConstants.WEEKDAY_DISCOUNT_PRICE;
 
 import christmas.domain.Order;
 import christmas.global.FoodMenu;
+import christmas.validator.DateValidator;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class WeekdayDiscount {
@@ -13,7 +15,8 @@ public class WeekdayDiscount {
     public WeekdayDiscount() {
     }
 
-    public static WeekdayDiscount createWeekdayDiscount() {
+    public static WeekdayDiscount createWeekdayDiscount(LocalDate date) {
+        DateValidator.validateDisCountPeriod(date);
         return new WeekdayDiscount();
     }
 
