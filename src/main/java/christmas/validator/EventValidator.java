@@ -5,7 +5,7 @@ import static christmas.global.constants.EventValidateConstants.*;
 import christmas.exception.InvalidMenuException;
 import christmas.exception.InvalidPriceException;
 import christmas.global.FoodMenu;
-import java.util.Map;
+import java.util.List;
 
 public class EventValidator {
     public static void validateOrderPrice(int orderPrice) {
@@ -14,9 +14,8 @@ public class EventValidator {
         }
     }
 
-    public static void validateOrderFoodCategory(Map<FoodMenu, Integer> foodMenus) {
-        if (foodMenus.keySet()
-                .stream()
+    public static void validateOrderFoodCategory(List<FoodMenu> foodMenus) {
+        if (foodMenus.stream()
                 .allMatch(foodMenu -> foodMenu
                         .getCategory()
                         .equals(RESTRICTED_CATEGORY))) {
@@ -24,8 +23,8 @@ public class EventValidator {
         }
     }
 
-    public static void validateOrderFoodCount(Map<FoodMenu, Integer> foodMenus) {
-        if (foodMenus.size() < MAX_FOOD_MENU) {
+    public static void validateOrderFoodMenuCount(int foodMenuCount) {
+        if (foodMenuCount > MAX_FOOD_MENU) {
             throw new InvalidMenuException();
         }
     }
