@@ -1,18 +1,23 @@
 package christmas.domain.event;
 
+import static christmas.global.DisCountPriceConstants.GIVE_AWAY_PRODUCT_PRICE_CONDITION;
 import static christmas.global.FoodMenu.*;
 
+import christmas.domain.Order;
 import christmas.global.FoodMenu;
 
-public class GiveawayEvent {
+public class GiveAwayEvent {
     // GiveawayProduct라는 객체 만들어서 메뉴와 개수 관리하면 좋을거 같다.
     private final FoodMenu GiveawayProduct = CHAMPAGNE;
 
-    public GiveawayEvent() {
+    public GiveAwayEvent() {
     }
 
-    public static GiveawayEvent createGiveawayEvent() {
-        return new GiveawayEvent();
+    public static GiveAwayEvent createGiveawayEvent(Order order) {
+        if (GIVE_AWAY_PRODUCT_PRICE_CONDITION <= order.getOrderAllPrice()) {
+            return new GiveAwayEvent();
+        }
+        return null;
     }
 
     public int getGiveawayProductPrice() {
