@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.global.FoodMenu;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -21,6 +22,19 @@ public record Order(Map<FoodMenu, Integer> foodMenus) {
                 .mapToInt(Order::calculateFoodMenuAllPrice)
                 .sum();
     }
+    public int getFoodMenuCount() {
+        return foodMenus
+                .values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public List<FoodMenu> getFoodMenus() {
+        return foodMenus.keySet()
+                .stream()
+                .toList();
+    }
 
     private static int calculateFoodMenuAllPrice(Entry<FoodMenu, Integer> foodMenu) {
         return foodMenu.getKey().getPrice() * foodMenu.getValue();
@@ -30,4 +44,6 @@ public record Order(Map<FoodMenu, Integer> foodMenus) {
     public Map<FoodMenu, Integer> foodMenus() {
         return Collections.unmodifiableMap(foodMenus);
     }
+
+
 }
