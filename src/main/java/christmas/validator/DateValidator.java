@@ -5,6 +5,7 @@ import static christmas.global.constants.DiscountDateConstants.*;
 import christmas.exception.InvalidDateException;
 import christmas.global.StarredDate;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class DateValidator {
 
@@ -18,12 +19,9 @@ public class DateValidator {
             throw new InvalidDateException();
         }
     }
-
     public static void validateSpecialDisCountPeriod(LocalDate currentDate) {
-        for (StarredDate date : StarredDate.values()) {
-            if (date.getLocalDate().equals(currentDate)) {
-                throw new InvalidDateException();
-            }
+        if (!StarredDate.isStarredDate(currentDate)) {
+            throw new InvalidDateException();
         }
     }
 }
