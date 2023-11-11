@@ -1,11 +1,10 @@
 package christmas.validator;
 
-import static christmas.global.DiscountDateConstants.*;
+import static christmas.global.constants.DiscountDateConstants.*;
 
 import christmas.exception.InvalidDateException;
 import christmas.global.StarredDate;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class DateValidator {
 
