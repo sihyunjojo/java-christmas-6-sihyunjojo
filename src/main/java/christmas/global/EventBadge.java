@@ -1,10 +1,12 @@
 package christmas.global;
 
 public enum EventBadge {
-    no("없음",0),
-    star("별", 5000),
+
+    santa("산타", 20000),
     tree("트리", 10000),
-    santa("산타", 20000);
+    star("별", 5000),
+    no("없음",0);
+
 
     private final String name;
     private final int priceCondition;
@@ -25,6 +27,7 @@ public enum EventBadge {
     public static EventBadge determineEventBadge(int orderPrice) {
         for (EventBadge badge : values()) {
             if (badge.getPriceCondition() <= orderPrice) {
+                System.out.println(badge);
                 return badge;
             }
         }
