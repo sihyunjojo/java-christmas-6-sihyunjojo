@@ -21,8 +21,8 @@ public class DDayDiscount {
         return new DDayDiscount(currentDate);
     }
 
-    public int discountAllOrderPrice(int allOrderPrice) {
-        return allOrderPrice - getCurrentDiscountPrice();
+    public int discountOrderPrice(int orderPrice) {
+        return orderPrice - getCurrentDiscountPrice();
     }
 
     public int getCurrentDiscountPrice() {
