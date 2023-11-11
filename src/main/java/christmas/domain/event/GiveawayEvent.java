@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import static christmas.global.DisCountPriceConstants.GIVE_AWAY_PRODUCT_PRICE_CONDITION;
+import static christmas.global.constants.EventValidateConstants.GIVE_AWAY_PRODUCT_PRICE_CONDITION;
 import static christmas.global.FoodMenu.*;
 
 import christmas.domain.Order;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class GiveAwayEvent {
     // GiveawayProduct라는 객체 만들어서 메뉴와 개수 관리하면 좋을거 같다.
-    private final FoodMenu GiveawayProduct = CHAMPAGNE;
+    private final FoodMenu giveAwayProduct = CHAMPAGNE;
 
     public GiveAwayEvent() {
     }
@@ -23,10 +23,14 @@ public class GiveAwayEvent {
         return null;
     }
 
+    public FoodMenu getGiveawayProduct() {
+        return giveAwayProduct;
+    }
+
     public int getGiveawayProductPrice() {
-        return GiveawayProduct.getPrice();
+        return giveAwayProduct.getPrice();
     }
     public String getGiveawayProductName() {
-        return GiveawayProduct.getName();
+        return giveAwayProduct.getName();
     }
 }

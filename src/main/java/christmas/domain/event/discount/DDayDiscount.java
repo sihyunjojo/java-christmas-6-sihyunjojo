@@ -1,7 +1,6 @@
 package christmas.domain.event.discount;
 
 import static christmas.domain.DDayDisCountPrice.*;
-import static christmas.global.DiscountDateConstants.*;
 
 import christmas.domain.DDayDisCountPrice;
 import christmas.validator.DateValidator;

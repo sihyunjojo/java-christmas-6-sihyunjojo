@@ -1,6 +1,6 @@
 package christmas.domain.event.discount;
 
-import static christmas.global.DisCountPriceConstants.WEEKDAY_DISCOUNT_PRICE;
+import static christmas.global.constants.DisCountPriceConstants.WEEKDAY_DISCOUNT_PRICE;
 
 import christmas.domain.Order;
 import christmas.global.FoodMenu;

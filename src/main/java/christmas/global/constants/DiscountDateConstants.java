@@ -1,4 +1,4 @@
-package christmas.global;
+package christmas.global.constants;
 
 import java.time.LocalDate;
 

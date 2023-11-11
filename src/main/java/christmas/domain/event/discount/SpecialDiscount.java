@@ -1,6 +1,6 @@
 package christmas.domain.event.discount;
 
-import static christmas.global.DisCountPriceConstants.SPECIAL_DISCOUNT_PRICE;
+import static christmas.global.constants.DisCountPriceConstants.SPECIAL_DISCOUNT_PRICE;
 
 import christmas.validator.DateValidator;
 import java.time.LocalDate;

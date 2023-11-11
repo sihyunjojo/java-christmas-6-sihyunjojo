@@ -1,7 +1,7 @@
 package christmas.domain;
 
-import static christmas.global.DisCountPriceConstants.*;
-import static christmas.global.DiscountDateConstants.*;
+import static christmas.global.constants.DisCountPriceConstants.*;
+import static christmas.global.constants.DiscountDateConstants.*;
 
 import java.time.LocalDate;
 

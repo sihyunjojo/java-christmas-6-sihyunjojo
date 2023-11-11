@@ -1,4 +1,4 @@
-package christmas.global;
+package christmas.global.constants;
 
 public class DisCountPriceConstants {
     public static int DISCOUNT_PRICE_INCREASE_PER_DAY = 100;
@@ -6,6 +6,4 @@ public class DisCountPriceConstants {
     public static int WEEKDAY_DISCOUNT_PRICE = 2023;
     public static int WEEKEND_DISCOUNT_PRICE = 2023;
     public static int SPECIAL_DISCOUNT_PRICE = 1000;
-
-    public static int GIVE_AWAY_PRODUCT_PRICE_CONDITION = 120000;
 }
