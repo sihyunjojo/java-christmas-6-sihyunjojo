@@ -3,7 +3,6 @@ package christmas.domain;
 import static christmas.global.DisCountPriceConstants.*;
 import static christmas.global.DiscountDateConstants.*;
 
-import christmas.validator.DateValidator;
 import java.time.LocalDate;
 
 public record DDayDisCountPrice(int discountPrice) {

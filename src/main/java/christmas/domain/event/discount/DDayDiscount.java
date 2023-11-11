@@ -1,8 +1,9 @@
-package christmas.domain;
+package christmas.domain.event.discount;
 
 import static christmas.domain.DDayDisCountPrice.*;
 import static christmas.global.DiscountDateConstants.*;
 
+import christmas.domain.DDayDisCountPrice;
 import christmas.validator.DateValidator;
 import java.time.LocalDate;
 import java.util.Objects;

@@ -1,18 +1,20 @@
-package christmas.domain;
+package christmas.domain.event.discount;
 
-import static christmas.global.DisCountPriceConstants.WEEKEND_DISCOUNT_PRICE;
+import static christmas.global.DisCountPriceConstants.WEEKDAY_DISCOUNT_PRICE;
 
+import christmas.domain.Order;
 import christmas.global.FoodMenu;
 import java.util.Map;
 
-public class WeekendDiscount {
-    private final int discountPrice = WEEKEND_DISCOUNT_PRICE;
+public class WeekdayDiscount {
 
-    public WeekendDiscount() {
+    private final int discountPrice = WEEKDAY_DISCOUNT_PRICE;
+
+    public WeekdayDiscount() {
     }
 
-    public static WeekendDiscount createWeekendDiscount() {
-        return new WeekendDiscount();
+    public static WeekdayDiscount createWeekdayDiscount() {
+        return new WeekdayDiscount();
     }
 
     public int discountAllOrderPrice(Order order) {
@@ -26,7 +28,7 @@ public class WeekendDiscount {
     private static int calculateDiscountedOtherFoodMenuPrice(Map<FoodMenu, Integer> foodMenus) {
         return foodMenus.entrySet()
                 .stream()
-                .filter(foodMenu -> !foodMenu.getKey().getCategory().equals("Main"))
+                .filter(foodMenu -> !foodMenu.getKey().getCategory().equals("Dessert"))
                 .mapToInt(otherFoodMenu -> otherFoodMenu.getValue() * otherFoodMenu.getKey().getPrice())
                 .sum();
     }
@@ -34,8 +36,9 @@ public class WeekendDiscount {
     private int calculateDiscountedDessertPrice(Map<FoodMenu, Integer> foodMenus) {
         return foodMenus.entrySet()
                 .stream()
-                .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Main"))
+                .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Dessert"))
                 .mapToInt(dessertMenu -> dessertMenu.getValue() * (dessertMenu.getKey().getPrice() - discountPrice))
                 .sum();
     }
+
 }

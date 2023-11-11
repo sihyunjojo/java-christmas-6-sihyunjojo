@@ -1,6 +1,7 @@
 package christmas.controller;
 
-import christmas.domain.DDayDiscount;
+import christmas.domain.event.discount.DDayDiscount;
+
 
 public class EventPlannerController {
     public static void planEvent() {
