@@ -16,8 +16,7 @@ public class DDayDiscount {
     }
 
 
-    public static DDayDiscount createDDayDiscount(int currentDay){
-        LocalDate currentDate = LocalDate.of(DISCOUNT_EVENT_YEAR, DISCOUNT_EVENT_MONTH, currentDay);
+    public static DDayDiscount createDDayDiscount(LocalDate currentDate){
         DateValidator.validateDDayDisCountPeriod(currentDate);
 
         return new DDayDiscount(currentDate);

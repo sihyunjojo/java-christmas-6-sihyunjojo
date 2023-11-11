@@ -17,7 +17,7 @@ class DDayDiscountTest {
     void testValidInputCreateDDayDiscount(int day) {
         LocalDate inputDate = LocalDate.of(2023, 12, day);
 
-        Assertions.assertEquals(DDayDiscount.createDDayDiscount(day),
+        Assertions.assertEquals(DDayDiscount.createDDayDiscount(inputDate),
                 new DDayDiscount(inputDate));
     }
 
@@ -25,14 +25,18 @@ class DDayDiscountTest {
     @ValueSource(ints = {26, 31})
     @ParameterizedTest
     void testInvalidInputCreateDDayDiscount(int day) {
-        Assertions.assertThrows(InvalidDateException.class, () -> DDayDiscount.createDDayDiscount(day));
+        LocalDate inputDate = LocalDate.of(2023, 12, day);
+
+        Assertions.assertThrows(InvalidDateException.class, () -> DDayDiscount.createDDayDiscount(inputDate));
     }
 
     @DisplayName("현재 할인 가격을 얻어오면 옳은 값을 가져온다.")
     @CsvSource(value = {"1:1000","2:1100","20:2900","25:3400"},delimiter = ':')
     @ParameterizedTest
     void testGetCurrentDiscountPrice(int day, int discountPrice) {
-        Assertions.assertEquals(DDayDiscount.createDDayDiscount(day).getCurrentDiscountPrice(),
+        LocalDate inputDate = LocalDate.of(2023, 12, day);
+
+        Assertions.assertEquals(DDayDiscount.createDDayDiscount(inputDate).getCurrentDiscountPrice(),
                 discountPrice);
     }
 }
