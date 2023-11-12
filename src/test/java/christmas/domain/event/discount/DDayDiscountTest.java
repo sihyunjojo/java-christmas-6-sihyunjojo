@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.event.discount;
 
 import christmas.domain.event.discount.DDayDiscount;
 import christmas.exception.InvalidDateException;

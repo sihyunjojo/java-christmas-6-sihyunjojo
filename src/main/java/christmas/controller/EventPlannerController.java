@@ -11,6 +11,6 @@ public class EventPlannerController {
 
 
         DDayDiscount dDayDiscount = DDayDiscount.createDDayDiscount(inputDate);
-        int discountedPrices = dDayDiscount.discountAllOrderPrice(allOrderPrice);
+        int discountedPrices = dDayDiscount.discountOrderPrice(allOrderPrice);
     }
 }
