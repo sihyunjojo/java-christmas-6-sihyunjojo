@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import static christmas.global.constants.EventValidateConstants.GIVE_AWAY_PRODUCT_PRICE_CONDITION;
+import static christmas.global.constants.EventValidateConstants.*;
 import static christmas.global.FoodMenu.*;
 
 import christmas.domain.GiveAwayProduct;
@@ -14,10 +14,9 @@ public class GiveAwayEvent {
     public GiveAwayEvent() {
         this.giveAwayProduct = GiveAwayProduct.createGiveAwayProduct(CHAMPAGNE, 1);
     }
-
     public static GiveAwayEvent createGiveawayEvent(Order order, LocalDate date) {
         DateValidator.validateDisCountPeriod(date);
-        if (GIVE_AWAY_PRODUCT_PRICE_CONDITION <= order.getOrderAllPrice()) {
+        if (GIVE_AWAY_EVENT_PRICE_CONDITION <= order.getOrderAllPrice()) {
             return new GiveAwayEvent();
         }
         return null;
