@@ -7,6 +7,7 @@ import christmas.global.FoodMenu;
 import christmas.validator.DateValidator;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
 public class WeekendDiscount {
     private final int discountPrice = WEEKEND_DISCOUNT_PRICE;
@@ -41,5 +42,22 @@ public class WeekendDiscount {
                 .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Main"))
                 .mapToInt(dessertMenu -> dessertMenu.getValue() * (dessertMenu.getKey().getPrice() - discountPrice))
                 .sum();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WeekendDiscount that = (WeekendDiscount) o;
+        return discountPrice == that.discountPrice;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(discountPrice);
     }
 }
