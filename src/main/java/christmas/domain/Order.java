@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 public record Order(Map<FoodMenu, Integer> foodMenus) {
     public Order(Map<FoodMenu, Integer> foodMenus) {
-        this.foodMenus = new HashMap<>();
+        this.foodMenus = foodMenus;
     }
 
     public static Order createOrder(Map<FoodMenu, Integer> foodMenus) {
@@ -19,8 +19,12 @@ public record Order(Map<FoodMenu, Integer> foodMenus) {
     public int getOrderAllPrice(){
         return foodMenus.entrySet()
                 .stream()
-                .mapToInt(Order::calculateFoodMenuAllPrice)
+                .mapToInt(this::calculateFoodMenuAllPrice)
                 .sum();
+    }
+
+    private int calculateFoodMenuAllPrice(Entry<FoodMenu, Integer> foodMenu) {
+        return foodMenu.getKey().getPrice() * foodMenu.getValue();
     }
     public int getFoodMenuCount() {
         return foodMenus
@@ -34,10 +38,6 @@ public record Order(Map<FoodMenu, Integer> foodMenus) {
         return foodMenus.keySet()
                 .stream()
                 .toList();
-    }
-
-    private static int calculateFoodMenuAllPrice(Entry<FoodMenu, Integer> foodMenu) {
-        return foodMenu.getKey().getPrice() * foodMenu.getValue();
     }
 
     @Override
