@@ -23,12 +23,12 @@ public class WeekendDiscount {
     public int discountAllOrderPrice(Order order) {
         Map<FoodMenu, Integer> foodMenus = order.foodMenus();
         int disCountedDessertPrice = calculateDiscountedDessertPrice(foodMenus);
-        int otherFoodMenuPrice = calculateDiscountedOtherFoodMenuPrice(foodMenus);
+        int otherFoodMenuPrice = calculateOtherFoodMenuPrice(foodMenus);
 
         return disCountedDessertPrice + otherFoodMenuPrice;
     }
 
-    private static int calculateDiscountedOtherFoodMenuPrice(Map<FoodMenu, Integer> foodMenus) {
+    public int calculateOtherFoodMenuPrice(Map<FoodMenu, Integer> foodMenus) {
         return foodMenus.entrySet()
                 .stream()
                 .filter(foodMenu -> !foodMenu.getKey().getCategory().equals("Main"))
@@ -36,7 +36,7 @@ public class WeekendDiscount {
                 .sum();
     }
 
-    private int calculateDiscountedDessertPrice(Map<FoodMenu, Integer> foodMenus) {
+    public int calculateDiscountedDessertPrice(Map<FoodMenu, Integer> foodMenus) {
         return foodMenus.entrySet()
                 .stream()
                 .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Main"))
