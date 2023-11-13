@@ -41,7 +41,7 @@ class DDayDisCountPriceTest {
         LocalDate date = LocalDate.of(2023, 12, day);
         DDayDiscount dDayDiscount = DDayDiscount.createDDayDiscount(date);
 
-        assertEquals(dDayDiscount.discountOrderPrice(orderPrice), orderPrice - dDayDiscount.getCurrentDiscountPrice());
+        assertEquals(dDayDiscount.discountOrderPrice(orderPrice), orderPrice - dDayDiscount.getDiscountPrice());
     }
 
     @DisplayName("적절한 날짜를 입력받으면 그 날짜에 대한 디데이 할인 가격이 나온다.")

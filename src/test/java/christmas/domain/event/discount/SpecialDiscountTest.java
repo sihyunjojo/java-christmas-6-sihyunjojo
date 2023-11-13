@@ -3,8 +3,6 @@ package christmas.domain.event.discount;
 import static christmas.global.constants.DisCountPriceConstants.SPECIAL_DISCOUNT_PRICE;
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.exception.InvalidDateException;
-import christmas.global.constants.DisCountPriceConstants;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,23 +12,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class SpecialDiscountTest {
 
-    @DisplayName("적절한 날(day)이 들어오면 SpecialDiscount 객체를 생성해준다.")
+    @DisplayName("SpecialDiscount 객체를 생성해준다.")
     @ValueSource(ints = {3, 25, 31})
     @ParameterizedTest
     void testValidInputCreateSpecialDiscount(int day) {
-        LocalDate inputDate = LocalDate.of(2023, 12, day);
-
-        Assertions.assertEquals(SpecialDiscount.createSpecialDiscount(inputDate),
+        Assertions.assertEquals(SpecialDiscount.createSpecialDiscount(),
                 new SpecialDiscount());
-    }
-
-    @DisplayName("부적절한 날(day)이 들어오면 예외를 발생시켜준다.")
-    @ValueSource(ints = {1, 20, 30})
-    @ParameterizedTest
-    void testInvalidInputCreateSpecialDiscount(int day) {
-        LocalDate inputDate = LocalDate.of(2023, 12, day);
-
-        Assertions.assertThrows(InvalidDateException.class, () -> SpecialDiscount.createSpecialDiscount(inputDate));
     }
 
     @DisplayName("전체주문가격이 들어오면 특별할인가격만큼 깍은 가격을 반환해준다.")
@@ -38,8 +25,8 @@ class SpecialDiscountTest {
     @ParameterizedTest
     void testDiscountAllOrderPrice(int day, int orderPrice) {
         LocalDate inputDate = LocalDate.of(2023, 12, day);
-        SpecialDiscount specialDiscount = SpecialDiscount.createSpecialDiscount(inputDate);
+        SpecialDiscount specialDiscount = SpecialDiscount.createSpecialDiscount();
 
-        Assertions.assertEquals(specialDiscount.discountAllOrderPrice(orderPrice),orderPrice- SPECIAL_DISCOUNT_PRICE);
+        Assertions.assertEquals(specialDiscount.discountOrderPrice(orderPrice),orderPrice- SPECIAL_DISCOUNT_PRICE);
     }
 }

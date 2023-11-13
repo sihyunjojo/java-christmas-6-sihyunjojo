@@ -36,7 +36,7 @@ class DDayDiscountTest {
     void testGetCurrentDiscountPrice(int day, int discountPrice) {
         LocalDate inputDate = LocalDate.of(2023, 12, day);
 
-        Assertions.assertEquals(DDayDiscount.createDDayDiscount(inputDate).getCurrentDiscountPrice(),
+        Assertions.assertEquals(DDayDiscount.createDDayDiscount(inputDate).getDiscountPrice(),
                 discountPrice);
     }
 }
