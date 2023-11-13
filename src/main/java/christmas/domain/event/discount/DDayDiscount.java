@@ -1,32 +1,43 @@
 package christmas.domain.event.discount;
 
 import static christmas.domain.DDayDisCountPrice.*;
+import static christmas.global.BenefitDetail.*;
 
+import christmas.domain.Benefit;
 import christmas.domain.DDayDisCountPrice;
 import christmas.validator.DateValidator;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class DDayDiscount {
-    private final DDayDisCountPrice currentDiscountPrice;
+public class DDayDiscount extends Benefit {
+    private final DDayDisCountPrice discountPrice;
+    private final int allDisCountPrice;
 
-    public DDayDiscount(LocalDate currentDate) {
-        this.currentDiscountPrice = createDDayDisCountPrice(currentDate);
+    public DDayDiscount(LocalDate date) {
+        this.discountPrice = createDDayDisCountPrice(date);
+        this.allDisCountPrice = getDiscountPrice();
     }
 
-
-    public static DDayDiscount createDDayDiscount(LocalDate currentDate){
-        DateValidator.validateDDayDisCountPeriod(currentDate);
-
-        return new DDayDiscount(currentDate);
+    public static DDayDiscount createDDayDiscount(LocalDate date){
+        DateValidator.validateDDayDisCountPeriod(date);
+        return new DDayDiscount(date);
     }
 
     public int discountOrderPrice(int orderPrice) {
-        return orderPrice - getCurrentDiscountPrice();
+        return orderPrice - getDiscountPrice();
+    }
+    public int getDiscountPrice() {
+        return discountPrice.discountPrice();
     }
 
-    public int getCurrentDiscountPrice() {
-        return currentDiscountPrice.discountPrice();
+    @Override
+    public String getDescription() {
+        return D_DAY_DISCOUNT.getMessage();
+    }
+
+    @Override
+    public int getBenefitPrice() {
+        return allDisCountPrice;
     }
 
     @Override
@@ -38,12 +49,12 @@ public class DDayDiscount {
             return false;
         }
         DDayDiscount that = (DDayDiscount) o;
-        return Objects.equals(currentDiscountPrice, that.currentDiscountPrice);
+        return allDisCountPrice == that.allDisCountPrice && Objects.equals(discountPrice, that.discountPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(currentDiscountPrice);
+        return Objects.hash(discountPrice, allDisCountPrice);
     }
 }
 
