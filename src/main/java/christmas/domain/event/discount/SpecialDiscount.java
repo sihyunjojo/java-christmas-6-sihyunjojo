@@ -1,24 +1,35 @@
 package christmas.domain.event.discount;
 
+import static christmas.global.BenefitDetail.SPECIAL_DISCOUNT;
 import static christmas.global.constants.DisCountPriceConstants.SPECIAL_DISCOUNT_PRICE;
 
-import christmas.validator.DateValidator;
-import java.time.LocalDate;
+import christmas.domain.Benefit;
 import java.util.Objects;
 
-public class SpecialDiscount {
-    private final int discountPrice = SPECIAL_DISCOUNT_PRICE;
+public class SpecialDiscount extends Benefit {
+    private final int allDisCountPrice;
+
 
     public SpecialDiscount() {
+        this.allDisCountPrice = SPECIAL_DISCOUNT_PRICE;
     }
 
-    public static SpecialDiscount createSpecialDiscount(LocalDate date) {
-        DateValidator.validateSpecialDisCountPeriod(date);
+    public static SpecialDiscount createSpecialDiscount() {
         return new SpecialDiscount();
     }
 
-    public int discountAllOrderPrice(int orderPrice) {
-        return orderPrice - discountPrice;
+    public int discountOrderPrice(int orderPrice) {
+        return orderPrice - SPECIAL_DISCOUNT_PRICE;
+    }
+
+    @Override
+    public String getDescription() {
+        return SPECIAL_DISCOUNT.getMessage();
+    }
+
+    @Override
+    public int getBenefitPrice() {
+        return allDisCountPrice;
     }
 
     @Override
@@ -30,11 +41,11 @@ public class SpecialDiscount {
             return false;
         }
         SpecialDiscount that = (SpecialDiscount) o;
-        return discountPrice == that.discountPrice;
+        return allDisCountPrice == that.allDisCountPrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(discountPrice);
+        return Objects.hash(allDisCountPrice);
     }
 }
