@@ -1,35 +1,48 @@
 package christmas.domain.event;
 
-import static christmas.global.constants.EventValidateConstants.*;
-import static christmas.global.FoodMenu.*;
+import static christmas.global.BenefitDetail.*;
 
+import christmas.domain.Benefit;
 import christmas.domain.GiveAwayProduct;
-import christmas.domain.Order;
-import christmas.validator.DateValidator;
-import java.time.LocalDate;
+import java.util.Objects;
 
-public class GiveAwayEvent {
+public class GiveAwayEvent extends Benefit {
     private final GiveAwayProduct giveAwayProduct;
 
-    public GiveAwayEvent() {
-        this.giveAwayProduct = GiveAwayProduct.createGiveAwayProduct(CHAMPAGNE, 1);
+    public GiveAwayEvent(GiveAwayProduct giveAwayProduct) {
+        this.giveAwayProduct = giveAwayProduct;
     }
-    public static GiveAwayEvent createGiveawayEvent(Order order, LocalDate date) {
-        DateValidator.validateDisCountPeriod(date);
-        if (GIVE_AWAY_EVENT_PRICE_CONDITION <= order.getOrderAllPrice()) {
-            return new GiveAwayEvent();
-        }
-        return null;
+    public static GiveAwayEvent createGiveAwayEvent(GiveAwayProduct giveAwayProduct) {
+        return new GiveAwayEvent(giveAwayProduct);
     }
-
+    public GiveAwayProduct getGiveAwayProduct() {
+        return giveAwayProduct;
+    }
     public int getGiveawayProductPrice() {
         return giveAwayProduct.product().getPrice();
     }
-    public String getGiveawayProductName() {
-        return giveAwayProduct.product().getName();
+    @Override
+    public String getDescription() {
+        return GIVE_AWAY_EVENT.getMessage();
+    }
+    @Override
+    public int getBenefitPrice() {
+        return getGiveawayProductPrice();
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GiveAwayEvent that = (GiveAwayEvent) o;
+        return Objects.equals(giveAwayProduct, that.giveAwayProduct);
     }
 
-    public int getGiveawayProductCount(){
-        return giveAwayProduct.count();
+    @Override
+    public int hashCode() {
+        return Objects.hash(giveAwayProduct);
     }
 }
