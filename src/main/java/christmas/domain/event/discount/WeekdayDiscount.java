@@ -1,49 +1,49 @@
 package christmas.domain.event.discount;
 
-import static christmas.global.BenefitDetail.WEEKDAY_DISCOUNT;
 import static christmas.global.constants.DisCountPriceConstants.WEEKDAY_DISCOUNT_PRICE;
 
-import christmas.domain.Benefit;
 import christmas.domain.Order;
 import christmas.global.FoodMenu;
+import christmas.validator.DateValidator;
+import java.time.LocalDate;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
-public class WeekdayDiscount extends Benefit {
-    private final int allDisCountPrice;
+public class WeekdayDiscount {
 
-    public WeekdayDiscount(int allDisCountPrice) {
-        this.allDisCountPrice = allDisCountPrice;
+    private final int discountPrice = WEEKDAY_DISCOUNT_PRICE;
+
+    public WeekdayDiscount() {
     }
 
-    public static WeekdayDiscount createWeekdayDiscount(Order order) {
-        int allDisCountPrice = calculateDiscountedPrice(order);
-        return new WeekdayDiscount(allDisCountPrice);
+    public static WeekdayDiscount createWeekdayDiscount(LocalDate date) {
+        DateValidator.validateDisCountPeriod(date);
+        return new WeekdayDiscount();
     }
 
-    public int discountOrderPrice(Order order) {
-        int orderPrice = order.getOrderPrice();
-        return orderPrice - allDisCountPrice;
-    }
-
-    private static int calculateDiscountedPrice(Order order) {
+    public int discountAllOrderPrice(Order order) {
         Map<FoodMenu, Integer> foodMenus = order.foodMenus();
+        int disCountedDessertPrice = calculateDiscountedDessertPrice(foodMenus);
+        int otherFoodMenuPrice = calculateOtherFoodMenuPrice(foodMenus);
 
-        return foodMenus.entrySet()
+        return disCountedDessertPrice + otherFoodMenuPrice;
+    }
+
+    public int calculateOtherFoodMenuPrice(Map<FoodMenu, Integer> foodMenus) {
+          return foodMenus.entrySet()
                 .stream()
-                .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Dessert"))
-                .mapToInt(dessertMenu -> (dessertMenu.getValue() *  WEEKDAY_DISCOUNT_PRICE))
+                .filter(foodMenu -> !foodMenu.getKey().getCategory().equals("Dessert"))
+                .mapToInt(otherFoodMenu -> otherFoodMenu.getValue() * otherFoodMenu.getKey().getPrice())
                 .sum();
     }
 
-    @Override
-    public String getDescription() {
-        return WEEKDAY_DISCOUNT.getMessage();
-    }
-
-    @Override
-    public int getBenefitPrice() {
-        return allDisCountPrice;
+    public int calculateDiscountedDessertPrice(Map<FoodMenu, Integer> foodMenus) {
+        return foodMenus.entrySet()
+                .stream()
+                .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Dessert"))
+                .mapToInt(dessertMenu -> (dessertMenu.getValue() * (dessertMenu.getKey().getPrice() - discountPrice)))
+                .sum();
     }
 
     @Override
@@ -55,11 +55,11 @@ public class WeekdayDiscount extends Benefit {
             return false;
         }
         WeekdayDiscount that = (WeekdayDiscount) o;
-        return allDisCountPrice == that.allDisCountPrice;
+        return discountPrice == that.discountPrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(allDisCountPrice);
+        return Objects.hash(discountPrice);
     }
 }
