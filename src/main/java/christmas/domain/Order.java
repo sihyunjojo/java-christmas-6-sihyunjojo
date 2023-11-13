@@ -2,7 +2,6 @@ package christmas.domain;
 
 import christmas.global.FoodMenu;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,7 +15,7 @@ public record Order(Map<FoodMenu, Integer> foodMenus) {
         return new Order(foodMenus);
     }
 
-    public int getOrderAllPrice(){
+    public int getOrderPrice(){
         return foodMenus.entrySet()
                 .stream()
                 .mapToInt(this::calculateFoodMenuAllPrice)
