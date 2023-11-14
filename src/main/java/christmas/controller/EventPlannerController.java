@@ -1,16 +1,34 @@
 package christmas.controller;
 
-import christmas.domain.event.discount.DDayDiscount;
+
+import static christmas.message.SystemMessage.*;
+
+import christmas.domain.EventPlanner;
+import christmas.domain.Order;
+import christmas.global.FoodMenu;
+import christmas.handler.OutputHandler;
+import christmas.validator.DateValidator;
+import christmas.validator.EventValidator;
+import christmas.handler.InputHandler;
+import christmas.view.OutputView;
 import java.time.LocalDate;
+import java.util.Map;
 
 
 public class EventPlannerController {
     public static void planEvent() {
-        int allOrderPrice = 0;
-        LocalDate inputDate = LocalDate.of(2023, 12, 1);
+        OutputView.printMessage(HELLO_EVENT_PLANNER);
+        LocalDate date = InputHandler.setDate();
+        Map<FoodMenu, Integer> foodMenus = InputHandler.setFoodMenus();
 
+        Order order = Order.createOrder(foodMenus);
 
-        DDayDiscount dDayDiscount = DDayDiscount.createDDayDiscount(inputDate);
-        int discountedPrices = dDayDiscount.discountOrderPrice(allOrderPrice);
+        DateValidator.validateDisCountPeriod(date);
+        EventValidator.validateOrderFoodCategory(order.getFoodMenus());
+        EventValidator.validateOrderFoodMenuCount(order.getFoodMenuCount());
+
+        EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
+
+        OutputHandler.outputEventPlanner(eventPlanner);
     }
 }
