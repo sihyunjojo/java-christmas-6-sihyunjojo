@@ -8,10 +8,8 @@ import christmas.global.FoodMenu;
 import java.util.List;
 
 public class EventValidator {
-    public static void validateOrderPrice(int orderPrice) {
-        if (orderPrice < EVENT_PRICE_CONDITION) {
-            throw new InvalidPriceException();
-        }
+    public static boolean validateOrderPrice(int orderPrice) {
+        return orderPrice >= EVENT_PRICE_CONDITION;
     }
 
     public static void validateOrderFoodCategory(List<FoodMenu> foodMenus) {
