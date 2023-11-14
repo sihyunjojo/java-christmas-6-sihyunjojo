@@ -16,9 +16,6 @@ public class InputUtil {
         return input.split(",");
     }
 
-    private static String[] splitStringByBar(String string) {
-        return string.split("-");
-    }
     public static Map<FoodMenu, Integer> StringsToFoodMenus(String[] input) {
         Map<FoodMenu, Integer> foodMenus = new HashMap<>();
         for (String string : input) {
@@ -36,8 +33,11 @@ public class InputUtil {
         return foodMenus;
     }
 
+    private static String[] splitStringByBar(String string) {
+        return string.split("-");
+    }
 
-    private static FoodMenu findFoodMenuByName(String menuName) {
+    public static FoodMenu findFoodMenuByName(String menuName) {
         for (FoodMenu foodMenu : FoodMenu.values()) {
             if (foodMenu.getName().equals(menuName)) {
                 return foodMenu;
