@@ -1,8 +1,10 @@
 package christmas.exception;
 
+import static christmas.message.ErrorMessage.INVALID_PRICE;
+
 public class InvalidPriceException extends IllegalArgumentException {
     public InvalidPriceException() {
-        super();
+        super(INVALID_PRICE.getMessage());
     }
 
     public InvalidPriceException(String s) {

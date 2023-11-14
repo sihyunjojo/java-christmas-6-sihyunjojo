@@ -1,8 +1,10 @@
 package christmas.exception;
 
+import static christmas.message.ErrorMessage.INVALID_MENU;
+
 public class InvalidMenuException extends IllegalArgumentException {
     public InvalidMenuException() {
-        super();
+        super(INVALID_MENU.getMessage());
     }
 
     public InvalidMenuException(String s) {
