@@ -13,6 +13,7 @@ public class InputFoodMenusValidator {
         InputValidator.validateInputStringParseInteger(count);
         validateInputMenuInFoodMenu(menuName);
     }
+
     public static void validateInputMenuInFoodMenu(String menu) {
         if (Arrays.stream(FoodMenu.values())
                 .noneMatch(foodMenu -> foodMenu.getName().equals(menu))) {
@@ -25,31 +26,35 @@ public class InputFoodMenusValidator {
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
-        
+
+        System.out.println(foodCount);
         if (foodCount < MIN_FOOD_MENU) {
             throw new InvalidInputException();
         }
     }
-    public static void validateInputStringFormatByBar(String[] splitInput) {
-        for (String string : splitInput) {
-            if (!string.contains("-")) {
-                throw new InvalidInputException();
-            }
+    public static void validateSplitFoodMenus(String[] splitFoodMenus){
+        for (String splitFoodMenu : splitFoodMenus) {
+            validateInputStringFormatByBar(splitFoodMenu);
         }
     }
+
+    public static void validateInputStringFormatByBar(String string) {
+        if (!string.contains("-")) {
+            throw new InvalidInputException();
+        }
+    }
+
     public static void validateInputStringFormatByCount(String[] splitInput) {
         if (splitInput.length != 2) {
             throw new InvalidInputException();
         }
     }
 
-    public static void validateInputFoodMenuIncludingDuplicate(Map<FoodMenu, Integer> foodMenus) {
-        long uniqueMenuCount = foodMenus.keySet()
-                .stream()
-                .distinct()
-                .count();
-        if (uniqueMenuCount != foodMenus.size()) {
-            throw new InvalidInputException();
+    public static void validateInputFoodMenuIncludingDuplicate(Map<FoodMenu, Integer> foodMenus, String menuName) {
+        for (FoodMenu foodMenu : foodMenus.keySet()) {
+            if (foodMenu.getName().equals(menuName)) {
+                throw new InvalidInputException();
+            }
         }
     }
 

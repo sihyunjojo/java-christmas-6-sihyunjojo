@@ -30,11 +30,10 @@ public class InputHandler {
 
         String inputFoodMenus = InputView.read();
         String[] splitFoodMenus = InputUtil.splitStringByComma(inputFoodMenus);
-        validateInputStringFormatByBar(splitFoodMenus);
+        validateSplitFoodMenus(splitFoodMenus);
 
         Map<FoodMenu, Integer> foodMenus = InputUtil.StringsToFoodMenus(splitFoodMenus);
         validateInputFoodMenuCount(foodMenus);
-        validateInputFoodMenuIncludingDuplicate(foodMenus);
 
         return foodMenus;
     }

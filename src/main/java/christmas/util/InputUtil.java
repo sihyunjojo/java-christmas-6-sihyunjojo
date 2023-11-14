@@ -29,12 +29,13 @@ public class InputUtil {
             String count = splitString[1];
 
             validateFoodMenus(menuName, count);
+            validateInputFoodMenuIncludingDuplicate(foodMenus, menuName);
             FoodMenu foodMenu = findFoodMenuByName(menuName);
             foodMenus.put(foodMenu, Integer.parseInt(count));
         }
         return foodMenus;
     }
-    
+
 
     private static FoodMenu findFoodMenuByName(String menuName) {
         for (FoodMenu foodMenu : FoodMenu.values()) {
