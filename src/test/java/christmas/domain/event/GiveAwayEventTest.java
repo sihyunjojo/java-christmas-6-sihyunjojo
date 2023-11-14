@@ -1,12 +1,9 @@
 package christmas.domain.event;
 
 import static christmas.domain.GiveAwayProduct.createGiveAwayProduct;
-import static christmas.global.FoodMenu.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.exception.InvalidDateException;
+
 import christmas.global.FoodMenu;
-import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
