@@ -17,11 +17,6 @@ public class SpecialDiscount extends Benefit {
     public static SpecialDiscount createSpecialDiscount() {
         return new SpecialDiscount();
     }
-
-    public int discountOrderPrice(int orderPrice) {
-        return orderPrice - SPECIAL_DISCOUNT_PRICE;
-    }
-
     @Override
     public String getName() {
         return SPECIAL_DISCOUNT.getName();

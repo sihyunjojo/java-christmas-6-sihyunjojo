@@ -23,9 +23,6 @@ public class DDayDiscount extends Benefit {
         return new DDayDiscount(date);
     }
 
-    public int discountOrderPrice(int orderPrice) {
-        return orderPrice - getDiscountPrice();
-    }
     public int getDiscountPrice() {
         return discountPrice.discountPrice();
     }
