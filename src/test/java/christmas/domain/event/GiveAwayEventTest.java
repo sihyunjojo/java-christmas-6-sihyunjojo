@@ -3,6 +3,7 @@ package christmas.domain.event;
 import static christmas.domain.GiveAwayProduct.createGiveAwayProduct;
 
 
+import christmas.domain.GiveAwayProduct;
 import christmas.global.FoodMenu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +15,13 @@ class GiveAwayEventTest {
     @CsvSource(value = {"CHAMPAGNE, 1","ZERO_COLA, 2"},delimiter = ',')
     @ParameterizedTest
     void testValidInputCreateGiveAwayEvent(String foodMenu, int count) {
-        Assertions.assertEquals(GiveAwayEvent.createGiveAwayEvent(createGiveAwayProduct(FoodMenu.valueOf(foodMenu), count)),
-                new GiveAwayEvent(createGiveAwayProduct(FoodMenu.valueOf(foodMenu), count)));
+        GiveAwayProduct giveAwayProduct = createGiveAwayProduct(FoodMenu.valueOf(foodMenu), count);
+        GiveAwayEvent giveAwayEvent = GiveAwayEvent.createGiveAwayEvent(giveAwayProduct);
+
+        Assertions.assertEquals(giveAwayEvent, new GiveAwayEvent(giveAwayProduct));
+        Assertions.assertEquals(giveAwayEvent.getGiveAwayProduct(), giveAwayProduct);
+        Assertions.assertEquals(giveAwayEvent.getGiveawayProductPrice(), giveAwayProduct.product().getPrice());
     }
+
 
 }
