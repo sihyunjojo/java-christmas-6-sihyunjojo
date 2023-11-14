@@ -24,10 +24,9 @@ public class BenefitValidator {
         return orderPrice >= EventValidateConstants.GIVE_AWAY_EVENT_PRICE_CONDITION;
     }
 
-
     public static boolean isWeekend(LocalDate date) {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
+        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.FRIDAY;
     }
 
 }
