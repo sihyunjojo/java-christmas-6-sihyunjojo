@@ -3,17 +3,13 @@ package christmas.validator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.exception.InvalidDateException;
-import christmas.exception.InvalidMenuException;
-import christmas.exception.InvalidPriceException;
+import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -64,7 +60,7 @@ class EventValidatorTest {
         foodMenus.add(FoodMenu.ZERO_COLA);
         foodMenus.add(FoodMenu.CHAMPAGNE);
 
-        Assertions.assertThrows(InvalidMenuException.class, () -> EventValidator.validateOrderFoodCategory(foodMenus));
+        Assertions.assertThrows(InvalidOrderException.class, () -> EventValidator.validateOrderFoodCategory(foodMenus));
     }
     @Test
     @DisplayName("음료와 음식을 시킬 경우, 예외가 발생하지 않는다.")
@@ -100,7 +96,7 @@ class EventValidatorTest {
     @ValueSource(ints = {21,100})
     @DisplayName("메뉴를 20개 초과로 시키면, 예외를 발생시킨다.")
     void testInValidateOrderFoodMenuCount(int foodMenuCount) {
-        Assertions.assertThrows(InvalidMenuException.class,() -> EventValidator.validateOrderFoodMenuCount(foodMenuCount));
+        Assertions.assertThrows(InvalidOrderException.class,() -> EventValidator.validateOrderFoodMenuCount(foodMenuCount));
     }
 
     @ParameterizedTest
