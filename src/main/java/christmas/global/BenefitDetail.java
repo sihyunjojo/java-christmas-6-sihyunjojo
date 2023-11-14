@@ -7,13 +7,13 @@ public enum BenefitDetail {
     WEEKEND_DISCOUNT("주말 할인"),
     GIVE_AWAY_EVENT("증정 이벤트");
 
-    private final String message;
+    private final String name;
 
-    BenefitDetail(String message) {
-        this.message = message;
+    BenefitDetail(String name) {
+        this.name = name;
     }
 
-    public String getMessage() {
-        return message;
+    public String getName() {
+        return name;
     }
 }

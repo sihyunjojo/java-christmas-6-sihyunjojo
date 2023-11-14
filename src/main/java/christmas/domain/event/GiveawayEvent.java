@@ -22,8 +22,8 @@ public class GiveAwayEvent extends Benefit {
         return giveAwayProduct.product().getPrice();
     }
     @Override
-    public String getDescription() {
-        return GIVE_AWAY_EVENT.getMessage();
+    public String getName() {
+        return GIVE_AWAY_EVENT.getName();
     }
     @Override
     public int getBenefitPrice() {

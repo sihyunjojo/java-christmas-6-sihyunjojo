@@ -37,8 +37,8 @@ public class WeekdayDiscount extends Benefit {
     }
 
     @Override
-    public String getDescription() {
-        return WEEKDAY_DISCOUNT.getMessage();
+    public String getName() {
+        return WEEKDAY_DISCOUNT.getName();
     }
 
     @Override

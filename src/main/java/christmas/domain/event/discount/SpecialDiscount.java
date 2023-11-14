@@ -23,8 +23,8 @@ public class SpecialDiscount extends Benefit {
     }
 
     @Override
-    public String getDescription() {
-        return SPECIAL_DISCOUNT.getMessage();
+    public String getName() {
+        return SPECIAL_DISCOUNT.getName();
     }
 
     @Override

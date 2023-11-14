@@ -31,8 +31,8 @@ public class DDayDiscount extends Benefit {
     }
 
     @Override
-    public String getDescription() {
-        return D_DAY_DISCOUNT.getMessage();
+    public String getName() {
+        return D_DAY_DISCOUNT.getName();
     }
 
     @Override
