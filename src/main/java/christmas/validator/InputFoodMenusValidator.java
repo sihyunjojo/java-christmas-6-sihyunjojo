@@ -9,6 +9,10 @@ import java.util.Map;
 
 public class InputFoodMenusValidator {
 
+    public static void validateFoodMenus(String menuName, String count) {
+        InputValidator.validateInputStringParseInteger(count);
+        validateInputMenuInFoodMenu(menuName);
+    }
     public static void validateInputMenuInFoodMenu(String menu) {
         if (Arrays.stream(FoodMenu.values())
                 .noneMatch(foodMenu -> foodMenu.getName().equals(menu))) {
@@ -26,14 +30,14 @@ public class InputFoodMenusValidator {
             throw new InvalidInputException();
         }
     }
-    public static void validateInputStringFormat(String[] splitInput) {
+    public static void validateInputStringFormatByBar(String[] splitInput) {
         for (String string : splitInput) {
             if (!string.contains("-")) {
                 throw new InvalidInputException();
             }
         }
     }
-    public static void validateInputStringFormat2(String[] splitInput) {
+    public static void validateInputStringFormatByCount(String[] splitInput) {
         if (splitInput.length != 2) {
             throw new InvalidInputException();
         }
