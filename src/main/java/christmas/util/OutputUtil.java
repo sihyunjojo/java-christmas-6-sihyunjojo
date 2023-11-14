@@ -7,5 +7,4 @@ public class OutputUtil {
         return String.format("%,d원", OrderPrice);
     }
 
-
 }
