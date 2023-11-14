@@ -21,11 +21,6 @@ public class WeekendDiscount extends Benefit {
         return new WeekendDiscount(allDisCountPrice);
     }
 
-    public int discountOrderPrice(Order order) {
-        int orderPrice = order.getOrderPrice();
-        return orderPrice - allDisCountPrice;
-    }
-
     private static int calculateDiscountedPrice(Order order) {
         Map<FoodMenu, Integer> foodMenus = order.foodMenus();
 
