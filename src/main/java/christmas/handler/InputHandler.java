@@ -6,7 +6,6 @@ import static christmas.validator.InputFoodMenusValidator.*;
 import christmas.global.FoodMenu;
 import christmas.util.InputUtil;
 import christmas.validator.InputDateValidator;
-import christmas.validator.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.time.LocalDate;
@@ -17,7 +16,7 @@ public class InputHandler {
         OutputView.printMessage(INPUT_DAY);
 
         String inputDay = InputView.read();
-        InputValidator.validateInputStringParseInteger(inputDay);
+        InputDateValidator.validateStringDateParseInteger(inputDay);
 
         int day = InputUtil.StringToInt(inputDay);
         InputDateValidator.validateInputDayPeriod(day);

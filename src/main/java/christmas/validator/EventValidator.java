@@ -5,7 +5,7 @@ import static christmas.global.constants.DiscountDateConstants.DECEMBER_DISCOUNT
 import static christmas.global.constants.EventValidateConstants.*;
 
 import christmas.exception.InvalidDateException;
-import christmas.exception.InvalidMenuException;
+import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,13 +25,13 @@ public class EventValidator {
                 .allMatch(foodMenu -> foodMenu
                         .getCategory()
                         .equals(RESTRICTED_CATEGORY))) {
-            throw new InvalidMenuException();
+            throw new InvalidOrderException();
         }
     }
 
     public static void validateOrderFoodMenuCount(int foodMenuCount) {
         if (foodMenuCount > MAX_FOOD_MENU) {
-            throw new InvalidMenuException();
+            throw new InvalidOrderException();
         }
     }
 }

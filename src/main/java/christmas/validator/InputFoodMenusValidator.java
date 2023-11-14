@@ -2,7 +2,9 @@ package christmas.validator;
 
 import static christmas.global.constants.EventValidateConstants.*;
 
+import christmas.exception.InvalidDateException;
 import christmas.exception.InvalidInputException;
+import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.util.Arrays;
 import java.util.Map;
@@ -10,8 +12,15 @@ import java.util.Map;
 public class InputFoodMenusValidator {
 
     public static void validateFoodMenus(String menuName, String count) {
-        InputValidator.validateInputStringParseInteger(count);
+        validateInputFoodCountParseInteger(count);
         validateInputMenuInFoodMenu(menuName);
+    }
+    private static void validateInputFoodCountParseInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e){
+            throw new InvalidOrderException();
+        }
     }
 
     public static void validateInputMenuInFoodMenu(String menu) {
