@@ -1,10 +1,13 @@
 package christmas.validator;
 
+import static christmas.global.constants.DiscountDateConstants.DECEMBER_DISCOUNT_END_DAY;
+import static christmas.global.constants.DiscountDateConstants.DECEMBER_DISCOUNT_START_DAY;
 import static christmas.global.constants.EventValidateConstants.*;
 
+import christmas.exception.InvalidDateException;
 import christmas.exception.InvalidMenuException;
-import christmas.exception.InvalidPriceException;
 import christmas.global.FoodMenu;
+import java.time.LocalDate;
 import java.util.List;
 
 public class EventValidator {
@@ -12,6 +15,11 @@ public class EventValidator {
         return orderPrice >= EVENT_PRICE_CONDITION;
     }
 
+    public static void validateDisCountPeriod(LocalDate currentDate) {
+        if (currentDate.isBefore(DECEMBER_DISCOUNT_START_DAY) || currentDate.isAfter(DECEMBER_DISCOUNT_END_DAY)) {
+            throw new InvalidDateException();
+        }
+    }
     public static void validateOrderFoodCategory(List<FoodMenu> foodMenus) {
         if (foodMenus.stream()
                 .allMatch(foodMenu -> foodMenu

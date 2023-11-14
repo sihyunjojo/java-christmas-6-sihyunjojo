@@ -5,7 +5,6 @@ import static christmas.global.BenefitDetail.*;
 
 import christmas.domain.Benefit;
 import christmas.domain.DDayDisCountPrice;
-import christmas.validator.DateValidator;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -19,7 +18,6 @@ public class DDayDiscount extends Benefit {
     }
 
     public static DDayDiscount createDDayDiscount(LocalDate date){
-        DateValidator.validateDDayDisCountPeriod(date);
         return new DDayDiscount(date);
     }
 

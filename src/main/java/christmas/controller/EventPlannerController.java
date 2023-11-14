@@ -7,7 +7,6 @@ import christmas.domain.EventPlanner;
 import christmas.domain.Order;
 import christmas.global.FoodMenu;
 import christmas.handler.OutputHandler;
-import christmas.validator.DateValidator;
 import christmas.validator.EventValidator;
 import christmas.handler.InputHandler;
 import christmas.view.OutputView;
@@ -23,7 +22,7 @@ public class EventPlannerController {
 
         Order order = Order.createOrder(foodMenus);
 
-        DateValidator.validateDisCountPeriod(date);
+        EventValidator.validateDisCountPeriod(date);
         EventValidator.validateOrderFoodCategory(order.getFoodMenus());
         EventValidator.validateOrderFoodMenuCount(order.getFoodMenuCount());
 
