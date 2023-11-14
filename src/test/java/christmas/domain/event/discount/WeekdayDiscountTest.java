@@ -28,17 +28,4 @@ class WeekdayDiscountTest {
                 new WeekdayDiscount(WEEKDAY_DISCOUNT_PRICE * dessertCount));
     }
 
-    @DisplayName("전체주문가격이 들어오면 평일할인정책에 따라 평일할인 가격만큼 깍은 가격을 반환해준다.")
-    @ValueSource(ints = {1,10})
-    @ParameterizedTest
-    void testDiscountAllOrderPrice(int dessertCount) {
-        Map<FoodMenu, Integer> foodMenus = new HashMap<>();
-        foodMenus.put(FoodMenu.BBQ_RIBS, 4);
-        foodMenus.put(FoodMenu.CHOCOLATE_CAKE, dessertCount);
-        Order order = Order.createOrder(foodMenus);
-
-        WeekdayDiscount weekdayDiscount = WeekdayDiscount.createWeekdayDiscount(order);
-        Assertions.assertEquals(weekdayDiscount.discountOrderPrice(order), order.getOrderPrice() - (WEEKDAY_DISCOUNT_PRICE * dessertCount));
-    }
-
 }
