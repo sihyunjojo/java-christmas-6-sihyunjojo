@@ -1,5 +1,6 @@
 package christmas.handler;
 
+import static christmas.global.constants.DiscountDateConstants.*;
 import static christmas.message.SystemMessage.*;
 import static christmas.validator.InputFoodMenusValidator.*;
 
@@ -33,7 +34,7 @@ public class InputHandler {
         int day = InputUtil.StringToInt(inputDay);
         InputDateValidator.validateInputDayPeriod(day);
 
-        LocalDate date = LocalDate.of(2023, 12, day);
+        LocalDate date = LocalDate.of(DISCOUNT_EVENT_YEAR, DISCOUNT_EVENT_MONTH, day);
         EventValidator.validateDisCountPeriod(date);
         return date;
     }
