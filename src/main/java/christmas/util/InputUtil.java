@@ -1,5 +1,6 @@
 package christmas.util;
 
+import static christmas.util.Util.findFoodMenuByName;
 import static christmas.validator.InputFoodMenusValidator.*;
 
 import christmas.global.FoodMenu;
@@ -37,13 +38,6 @@ public class InputUtil {
         return string.split("-");
     }
 
-    public static FoodMenu findFoodMenuByName(String menuName) {
-        for (FoodMenu foodMenu : FoodMenu.values()) {
-            if (foodMenu.getName().equals(menuName)) {
-                return foodMenu;
-            }
-        }
-        return null;
-    }
+
 
 }
