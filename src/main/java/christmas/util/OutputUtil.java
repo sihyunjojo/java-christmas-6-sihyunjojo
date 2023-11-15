@@ -1,19 +1,31 @@
 package christmas.util;
 
-import christmas.domain.Benefit;
+import static christmas.message.SystemMessage.OUTPUT_MENU_NAME_AND_COUNT_MESSAGE;
+
+import christmas.domain.GiveAwayProduct;
+import christmas.global.FoodMenu;
+import christmas.message.MessageProvider;
+import java.util.Map.Entry;
 
 public class OutputUtil {
-    public static String priceToString(int orderPrice) {
+    @SafeVarargs
+    public static <T> String setMessage(MessageProvider message, T... values) {
+        return String.format(message.getMessage(), (Object[]) values);
+    }
+    public static String priceToStringMessage(int orderPrice) {
         return String.format("%,d원", orderPrice);
     }
-    public static String setMenuNameAndCountMessage(String MenuName, int count) {
-        return MenuName + " " + count + "개";
+    public static String setFoodMenuMessage(Entry<FoodMenu, Integer> foodMenu) {
+        String foodName = foodMenu.getKey().getName();
+        Integer foodCount = foodMenu.getValue();
+
+        return setMessage(OUTPUT_MENU_NAME_AND_COUNT_MESSAGE,foodName, foodCount);
     }
-    public static String setBenefitMessage(String benefitName, String outputBenefitPrice) {
-        return benefitName + ": -" + outputBenefitPrice;
-    }
-    public static String setMinusPriceMessage(String outputBenefitPrice) {
-        return "-" + outputBenefitPrice;
+    public static String setGiveAwayProductMessage(GiveAwayProduct giveAwayProduct) {
+        String giveAwayProductName = giveAwayProduct.product().getName();
+        int giveAwayProductCount = giveAwayProduct.count();
+
+        return setMessage(OUTPUT_MENU_NAME_AND_COUNT_MESSAGE, giveAwayProductName, giveAwayProductCount);
     }
 
 }

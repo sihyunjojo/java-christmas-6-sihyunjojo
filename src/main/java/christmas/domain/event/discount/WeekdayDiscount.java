@@ -26,7 +26,9 @@ public class WeekdayDiscount extends Benefit {
 
         return foodMenus.entrySet()
                 .stream()
-                .filter(foodMenu -> foodMenu.getKey().getCategory().equals("Dessert"))
+                .filter(foodMenu -> foodMenu.getKey()
+                        .getCategory()
+                        .equals("Dessert"))
                 .mapToInt(mainMenu -> (mainMenu.getValue() *  WEEKDAY_DISCOUNT_PRICE))
                 .sum();
     }

@@ -57,18 +57,11 @@ public class OutputHandler {
         }
     }
 
-    private static String setFoodMenuMessage(Entry<FoodMenu, Integer> foodMenu) {
-        String foodName = foodMenu.getKey().getName();
-        Integer foodCount = foodMenu.getValue();
-
-        return setMenuNameAndCountMessage(foodName, foodCount);
-    }
-
-    public static void outputTotalOrderPriceBeforeDiscount(int OrderPrice) {
+    public static void outputTotalOrderPriceBeforeDiscount(int orderPrice) {
         OutputView.printMessage(OUTPUT_TOTAL_ORDER_PRICE_BEFORE_DISCOUNT);
 
-        String outputOrderPrice = priceToString(OrderPrice);
-        OutputView.printWithBlankLine(outputOrderPrice);
+//        String outputOrderPrice = priceToStringMessage(OrderPrice);
+        OutputView.printWithBlankLine(setMessage(OUTPUT_PRICE_MESSAGE, orderPrice));
     }
 
 
@@ -83,14 +76,6 @@ public class OutputHandler {
         OutputView.printWithBlankLine(outputGiveAwayProduct);
     }
 
-    private static String setGiveAwayProductMessage(GiveAwayProduct giveAwayProduct) {
-        String giveAwayProductName = giveAwayProduct.product().getName();
-        int giveAwayProductCount = giveAwayProduct.count();
-
-        return setMenuNameAndCountMessage(giveAwayProductName, giveAwayProductCount);
-    }
-
-
     public static void outputBenefitDetail(Map<BenefitDetail, Benefit> benefits) {
         OutputView.printMessage(OUTPUT_BENEFIT_DETAIL);
         List<String> outputBenefits = new ArrayList<>();
@@ -99,13 +84,11 @@ public class OutputHandler {
             OutputView.printMessageWithBlankLine(OUTPUT_NOTHING);
             return;
         }
-        outputBenefits(benefits, outputBenefits);
+        setOutputBenefits(benefits, outputBenefits);
+        outputBenefits(outputBenefits);
     }
 
-    private static void outputBenefits(Map<BenefitDetail, Benefit> benefits, List<String> outputBenefits) {
-        for (Entry<BenefitDetail, Benefit> benefit : benefits.entrySet()) {
-            addOutputBenefit(benefit, outputBenefits);
-        }
+    private static void outputBenefits(List<String> outputBenefits) {
         if (outputBenefits.isEmpty()) {
             OutputView.printMessageWithBlankLine(OUTPUT_NOTHING);
             return;
@@ -113,13 +96,20 @@ public class OutputHandler {
         OutputView.printMessagesWithBlankLine(outputBenefits);
     }
 
+    private static void setOutputBenefits(Map<BenefitDetail, Benefit> benefits, List<String> outputBenefits) {
+        for (Entry<BenefitDetail, Benefit> benefit : benefits.entrySet()) {
+            addOutputBenefit(benefit, outputBenefits);
+        }
+    }
+
     private static void addOutputBenefit(Entry<BenefitDetail, Benefit> benefit, List<String> outputBenefits) {
         String benefitName = benefit.getKey().getName();
         int benefitPrice = benefit.getValue().getBenefitPrice();
 
         if (benefitPrice != 0) {
-            String outputBenefitPrice = priceToString(benefitPrice);
-            String outputBenefit = setBenefitMessage(benefitName, outputBenefitPrice);
+//            String outputBenefitPrice = priceToStringMessage(benefitPrice);
+//            String outputBenefit = setBenefitMessage(benefitName, outputBenefitPrice);
+            String outputBenefit = setMessage(OUTPUT_BENEFIT_MESSAGE,benefitName,benefitPrice);
             outputBenefits.add(outputBenefit);
         }
     }
@@ -127,20 +117,19 @@ public class OutputHandler {
 
     public static void outputTotalBenefitPrice(int totalBenefitPrice) {
         OutputView.printMessage(OUTPUT_TOTAL_BENEFIT_PRICE);
-        String outputBenefitPrice = priceToString(totalBenefitPrice);
 
         if (totalBenefitPrice == 0) {
-            OutputView.printWithBlankLine(outputBenefitPrice);
+            OutputView.printWithBlankLine(setMessage(OUTPUT_PRICE_MESSAGE, totalBenefitPrice));
             return;
         }
-        OutputView.printWithBlankLine(setMinusPriceMessage(outputBenefitPrice));
+        OutputView.printWithBlankLine(setMessage(OUTPUT_MINUS_PRICE_MESSAGE, totalBenefitPrice));
     }
 
 
 
     public static void outputPaymentPriceAfterDiscount(int discountedOrderPrice) {
         OutputView.printMessage(OUTPUT_PAYMENT_PRICE_AFTER_DISCOUNT);
-        String outputDisCountedOrderPrice = priceToString(discountedOrderPrice);
+        String outputDisCountedOrderPrice = setMessage(OUTPUT_PRICE_MESSAGE, discountedOrderPrice);
         OutputView.printWithBlankLine(outputDisCountedOrderPrice);
     }
 
