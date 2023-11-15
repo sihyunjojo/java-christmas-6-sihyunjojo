@@ -13,7 +13,6 @@ public record DDayDisCountPrice(int discountPrice) {
 
     public static int updateDDayDisCountPrice(LocalDate currentDate) {
         int plusDay = currentDate.getDayOfMonth() - D_DAY_DISCOUNT_START_DAY.getDayOfMonth();
-        // 음수 예외 처리 후 다시 받는 코드
 
         return INITIAL_D_DAY_DISCOUNT_PRICE
                 + (DISCOUNT_PRICE_INCREASE_PER_DAY * plusDay);

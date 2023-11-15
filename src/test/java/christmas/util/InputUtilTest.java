@@ -1,6 +1,7 @@
 package christmas.util;
 
 import static christmas.util.InputUtil.*;
+import static christmas.util.Util.findFoodMenuByName;
 import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.exception.InvalidInputException;

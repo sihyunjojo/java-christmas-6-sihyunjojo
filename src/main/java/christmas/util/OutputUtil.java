@@ -12,9 +12,6 @@ public class OutputUtil {
     public static <T> String setMessage(MessageProvider message, T... values) {
         return String.format(message.getMessage(), (Object[]) values);
     }
-    public static String priceToStringMessage(int orderPrice) {
-        return String.format("%,d원", orderPrice);
-    }
     public static String setFoodMenuMessage(Entry<FoodMenu, Integer> foodMenu) {
         String foodName = foodMenu.getKey().getName();
         Integer foodCount = foodMenu.getValue();
