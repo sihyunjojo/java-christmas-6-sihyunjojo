@@ -12,7 +12,9 @@ public enum SystemMessage implements MessageProvider{
     OUTPUT_BENEFIT_DETAIL("<혜택 내역>"),
     OUTPUT_TOTAL_BENEFIT_PRICE("<총혜택 금액>"),
     OUTPUT_PAYMENT_PRICE_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
-    OUTPUT_DECEMBER_EVENT_BADGE("<12월 이벤트 배지>");
+    OUTPUT_DECEMBER_EVENT_BADGE("<12월 이벤트 배지>"),
+    OUTPUT_NOTHING("없음");
+
 
     private final String message;
 
