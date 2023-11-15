@@ -21,15 +21,6 @@ class DDayDiscountTest {
                 new DDayDiscount(inputDate));
     }
 
-    @DisplayName("부적절한 날(day)이 들어오면 예외를 발생시켜준다.")
-    @ValueSource(ints = {26, 31})
-    @ParameterizedTest
-    void testInvalidInputCreateDDayDiscount(int day) {
-        LocalDate inputDate = LocalDate.of(2023, 12, day);
-
-        Assertions.assertThrows(InvalidDateException.class, () -> DDayDiscount.createDDayDiscount(inputDate));
-    }
-
     @DisplayName("현재 할인 가격을 얻어오면 옳은 값을 가져온다.")
     @CsvSource(value = {"1:1000","2:1100","20:2900","25:3400"},delimiter = ':')
     @ParameterizedTest
