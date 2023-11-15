@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class BenefitValidatorTest {
@@ -83,15 +84,26 @@ class BenefitValidatorTest {
 
     @DisplayName("GiveAwayEventValid 메서드 True 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {120000,200000,1000000})
-    void testGiveAwayEventValid(int orderPrice) {
-        assertTrue(BenefitValidator.isGiveAwayEventValid(orderPrice));
+    @CsvSource(value = {"2023-12-01, 120000","2023-12-25, 200000","2023-12-31, 1000000"})
+    void testGiveAwayEventValid(String dateString, int orderPrice) {
+        LocalDate date = LocalDate.parse(dateString);
+        assertTrue(BenefitValidator.isGiveAwayEventValid(date,orderPrice));
     }
 
-    @DisplayName("GiveAwayEventValid 메서드 False 테스트")
+    @DisplayName("GiveAwayEventValid 메서드 가격에 의한 False 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {0,1000,10000,100000})
-    void testGiveAwayEventValidInInvalid(int orderPrice) {
-        assertFalse(BenefitValidator.isGiveAwayEventValid(orderPrice));
+    @CsvSource(value = {"2023-12-01, 0","2023-12-25, 10000","2023-12-31, 100000"})
+    void testGiveAwayEventValidInInvalidPrice(String dateString, int orderPrice) {
+        LocalDate date = LocalDate.parse(dateString);
+        assertFalse(BenefitValidator.isGiveAwayEventValid(date,orderPrice));
     }
+    @DisplayName("GiveAwayEventValid 메서드 날짜에 의한 False 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"2023-11-01, 120000","2024-01-01, 200000","2025-12-31, 1000000"})
+    void testGiveAwayEventValidInInvalidDate(String dateString, int orderPrice) {
+        LocalDate date = LocalDate.parse(dateString);
+        assertFalse(BenefitValidator.isGiveAwayEventValid(date,orderPrice));
+    }
+
+
 }
