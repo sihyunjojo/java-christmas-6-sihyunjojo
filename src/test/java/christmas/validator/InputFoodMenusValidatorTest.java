@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import christmas.exception.InvalidInputException;
 import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
+import christmas.util.Util;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -108,6 +109,7 @@ class InputFoodMenusValidatorTest {
     @DisplayName("입력이 2개로 나누어져 있지 않으면, 예외를 일으킨다.")
     void testValidateInputStringFormatByCountByInvalidInput(String input) {
         String[] splitString = {input};
+
         assertThrows(InvalidInputException.class, () -> InputFoodMenusValidator.validateInputStringFormatByCount(splitString));
     }
     @ParameterizedTest
@@ -132,12 +134,11 @@ class InputFoodMenusValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"티본스테이크","제로콜라"})
     @DisplayName("메뉴에 중복이 있으면, 예외를 일으킨다.")
-    void testValidateInputFoodMenuIncludingDuplicateByInvalidMenu(String foodMenu) {
+    void testValidateInputFoodMenuIncludingDuplicateByInvalidFoodMenu(String foodMenu) {
         Map<FoodMenu, Integer> foodMenus = new HashMap<>();
-        foodMenus.put(FoodMenu.T_BONE_STEAK, 2);
-        foodMenus.put(FoodMenu.ZERO_COLA, 1);
+        foodMenus.put(Util.findFoodMenuByName(foodMenu), 1);
 
-        assertThrows(InvalidInputException.class, () -> InputFoodMenusValidator.validateInputFoodMenuIncludingDuplicate(foodMenus, foodMenu));
+        assertThrows(InvalidOrderException.class, () -> InputFoodMenusValidator.validateInputFoodMenuIncludingDuplicate(foodMenus, foodMenu));
     }
 }
 
