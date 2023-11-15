@@ -5,13 +5,10 @@ import static christmas.message.SystemMessage.*;
 
 import christmas.domain.EventPlanner;
 import christmas.domain.Order;
-import christmas.global.FoodMenu;
 import christmas.handler.OutputHandler;
-import christmas.validator.EventValidator;
 import christmas.handler.InputHandler;
 import christmas.view.OutputView;
 import java.time.LocalDate;
-import java.util.Map;
 
 
 public class EventPlannerController {
