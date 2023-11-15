@@ -60,7 +60,7 @@ public class InputFoodMenusValidator {
     public static void validateInputFoodMenuIncludingDuplicate(Map<FoodMenu, Integer> foodMenus, String menuName) {
         for (FoodMenu foodMenu : foodMenus.keySet()) {
             if (foodMenu.getName().equals(menuName)) {
-                throw new InvalidInputException();
+                throw new InvalidOrderException();
             }
         }
     }
