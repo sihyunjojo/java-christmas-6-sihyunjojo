@@ -71,24 +71,35 @@ public class OutputHandler {
 
     public static void outputBenefitDetail(Map<BenefitDetail, Benefit> benefits) {
         OutputView.printMessage(OUTPUT_BENEFIT_DETAIL);
+        List<String> outputBenefits = new ArrayList<>();
 
         if (!benefits.isEmpty()) {
-            List<String> outputBenefits = new ArrayList<>();
-            for (Entry<BenefitDetail, Benefit> benefit : benefits.entrySet()) {
-                String benefitName = benefit.getKey().getName();
-                int benefitPrice = benefit.getValue().getBenefitPrice();
-
-                String outputBenefitPrice = priceToString(benefitPrice);
-                String outputBenefit = benefitName + ": -" + outputBenefitPrice;
-                outputBenefits.add(outputBenefit);
-            }
-
-            OutputView.printMessagesWithBlankLine(outputBenefits);
+            outputBenefits(benefits, outputBenefits);
             return;
         }
-
         OutputView.printWithBlankLine("없음");
+    }
 
+    private static void outputBenefits(Map<BenefitDetail, Benefit> benefits, List<String> outputBenefits) {
+        for (Entry<BenefitDetail, Benefit> benefit : benefits.entrySet()) {
+            addOutputBenefit(benefit, outputBenefits);
+        }
+        if (outputBenefits.isEmpty()) {
+            OutputView.printWithBlankLine("없음");
+            return;
+        }
+        OutputView.printMessagesWithBlankLine(outputBenefits);
+    }
+
+    private static void addOutputBenefit(Entry<BenefitDetail, Benefit> benefit, List<String> outputBenefits) {
+        String benefitName = benefit.getKey().getName();
+        int benefitPrice = benefit.getValue().getBenefitPrice();
+
+        if (benefitPrice != 0) {
+            String outputBenefitPrice = priceToString(benefitPrice);
+            String outputBenefit = benefitName + ": -" + outputBenefitPrice;
+            outputBenefits.add(outputBenefit);
+        }
     }
 
     public static void outputTotalBenefitPrice(int totalBenefitPrice) {
