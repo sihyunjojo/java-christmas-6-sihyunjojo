@@ -11,14 +11,14 @@ public class OutputView {
         System.out.println(message.getMessage());
     }
     public static void printMessageWithBlankLine(MessageProvider message) {
-        System.out.println(message.getMessage());
+        printMessage(message);
         printMessageBlankLine();
     }
     public static <T> void print(T message){
         System.out.println(message);
     }
     public static <T> void printWithBlankLine(T message) {
-        System.out.println(message);
+        print(message);
         printMessageBlankLine();
     }
     public static <T> void printMessagesWithBlankLine(List<T> messages) {
