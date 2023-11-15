@@ -60,7 +60,6 @@ public class OutputHandler {
     public static void outputTotalOrderPriceBeforeDiscount(int orderPrice) {
         OutputView.printMessage(OUTPUT_TOTAL_ORDER_PRICE_BEFORE_DISCOUNT);
 
-//        String outputOrderPrice = priceToStringMessage(OrderPrice);
         OutputView.printWithBlankLine(setMessage(OUTPUT_PRICE_MESSAGE, orderPrice));
     }
 
