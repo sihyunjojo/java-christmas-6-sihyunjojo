@@ -18,13 +18,14 @@ import java.util.Map;
 public class InputHandler {
     public static LocalDate setDate(){
         OutputView.printMessage(INPUT_DAY);
-        while (true) {
+//        while (true) {
             try {
                 return inputDate();
             } catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_DATE);
             }
-        }
+//        }
+        return null;
     }
 
     private static LocalDate inputDate() {
@@ -41,14 +42,15 @@ public class InputHandler {
 
     public static Order setOrder(){
         OutputView.printMessage(INPUT_FOOD_MENUS);
-        while (true) {
+//        while (true) {
             try {
                 return createOrder(inputFoodMenus());
             }
             catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_ORDER);
             }
-        }
+//        }
+        return createOrder(inputFoodMenus());
     }
 
     private static Order createOrder(Map<FoodMenu, Integer> foodMenus) {
