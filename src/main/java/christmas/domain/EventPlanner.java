@@ -67,7 +67,7 @@ public class EventPlanner {
         if (BenefitValidator.isSpecialDiscountValid(date)) {
             benefits.put(SPECIAL_DISCOUNT,SpecialDiscount.createSpecialDiscount());
         }
-        if (BenefitValidator.isGiveAwayEventValid(orderPrice)) {
+        if (BenefitValidator.isGiveAwayEventValid(date,orderPrice)) {
             GiveAwayProduct giveAwayProduct = GiveAwayProduct.createGiveAwayProduct(FoodMenu.CHAMPAGNE, 1);
             benefits.put(GIVE_AWAY_EVENT,GiveAwayEvent.createGiveAwayEvent(giveAwayProduct));
         }
