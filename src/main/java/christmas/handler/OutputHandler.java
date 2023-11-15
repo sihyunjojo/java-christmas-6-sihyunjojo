@@ -132,6 +132,6 @@ public class OutputHandler {
 
     public static void outputDecemberEventBadge(EventBadge badge) {
         OutputView.printMessage(OUTPUT_DECEMBER_EVENT_BADGE);
-        OutputView.printWithBlankLine(badge.getName());
+        OutputView.print(badge.getName());
     }
 }
