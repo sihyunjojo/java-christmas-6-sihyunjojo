@@ -5,6 +5,7 @@ import static christmas.util.Util.findFoodMenuByName;
 import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.exception.InvalidInputException;
+import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,6 @@ class InputUtilTest {
     void testStringsToFoodMenusByInvalidInput(String input1, String input2) {
         String[] input = {input1, input2};
 
-        assertThrows(InvalidInputException.class, () -> StringsToFoodMenus(input));
+        assertThrows(InvalidOrderException.class, () -> StringsToFoodMenus(input));
     }
 }

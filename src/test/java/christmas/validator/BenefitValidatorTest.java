@@ -48,7 +48,7 @@ class BenefitValidatorTest {
 
     @DisplayName("WeekendDiscountValid 메서드 True 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"2023-12-02","2023-12-03","2023-12-23","2023-12-30","2023-12-31"})
+    @ValueSource(strings = {"2023-12-02","2023-12-08","2023-12-23","2023-12-22","2023-12-30"})
     void testWeekendDiscountValid(String dateString) {
         LocalDate date = LocalDate.parse(dateString);
 
@@ -57,7 +57,7 @@ class BenefitValidatorTest {
 
     @DisplayName("WeekendDiscountValid 메서드 False 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"2023-12-01","2023-12-13","2023-12-29"})
+    @ValueSource(strings = {"2023-12-03","2023-12-13","2023-12-31"})
     void testWeekendDiscountValidInInvalid(String dateString) {
         LocalDate date = LocalDate.parse(dateString);
 
@@ -66,7 +66,7 @@ class BenefitValidatorTest {
 
     @DisplayName("WeekdayDiscountValid 메서드 True 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"2023-12-01","2023-12-13","2023-12-29"})
+    @ValueSource(strings = {"2023-12-03","2023-12-13","2023-12-31"})
     void testWeekdayDiscountValid(String dateString) {
         LocalDate date = LocalDate.parse(dateString);
 
@@ -75,7 +75,7 @@ class BenefitValidatorTest {
 
     @DisplayName("WeekdayDiscountValid 메서드 False 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"2023-12-02","2023-12-03","2023-12-23","2023-12-30","2023-12-31"})
+    @ValueSource(strings = {"2023-12-01","2023-12-02","2023-12-23","2023-12-29","2023-12-30"})
     void testWeekdayDiscountValidInInvalid(String dateString) {
         LocalDate date = LocalDate.parse(dateString);
 

@@ -3,6 +3,7 @@ package christmas.validator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.exception.InvalidInputException;
+import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,14 +26,14 @@ class InputFoodMenusValidatorTest {
     @CsvSource(value = {"라면,1","감자,2","까르보나라,3"})
     @DisplayName("메뉴 안에 없는 메뉴와 숫자인 개수가 들어가면, 예외를 일으킨다.")
     void testInvalidateFoodMenusInvalidateMenu(String menuName, String count) {
-        assertThrows(InvalidInputException.class,
+        assertThrows(InvalidOrderException.class,
                 () -> InputFoodMenusValidator.validateFoodMenus(menuName, count));
     }
     @ParameterizedTest
     @CsvSource(value = {"티본스테이크,abc","제로콜라,제로콜라"})
     @DisplayName("메뉴 안에 있는 메뉴와 숫자가 아닌 개수가 들어가면, 예외를 일으킨다.")
     void testInvalidateFoodMenusInvalidateCount(String menuName, String count) {
-        assertThrows(InvalidInputException.class,
+        assertThrows(InvalidOrderException.class,
                 () -> InputFoodMenusValidator.validateFoodMenus(menuName, count));
     }
     @ParameterizedTest
@@ -46,7 +47,7 @@ class InputFoodMenusValidatorTest {
     @ValueSource(strings = {"라면", "감자", "까르보나라", "존재하지않는메뉴"})
     @DisplayName("메뉴 안에 없는 메뉴가 들어가면, 예외를 일으킨다.")
     void testValidateFoodMenusByInvalidateMenu(String menuName) {
-        assertThrows(InvalidInputException.class,
+        assertThrows(InvalidOrderException.class,
                 () -> InputFoodMenusValidator.validateInputMenuInFoodMenu(menuName));
     }
 
@@ -67,7 +68,7 @@ class InputFoodMenusValidatorTest {
         Map<FoodMenu, Integer> FoodMenus = new HashMap<>();
         FoodMenus.put(FoodMenu.BBQ_RIBS, invalidCount);
 
-        assertThrows(InvalidInputException.class,
+        assertThrows(InvalidOrderException.class,
                 () -> InputFoodMenusValidator.validateInputFoodMenuCount(FoodMenus));
     }
 
