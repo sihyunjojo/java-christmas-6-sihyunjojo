@@ -2,12 +2,9 @@ package christmas.validator;
 
 import static christmas.global.constants.EventValidateConstants.*;
 
-import christmas.exception.InvalidDateException;
 import christmas.exception.InvalidInputException;
 import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
-import christmas.message.ErrorMessage;
-import christmas.view.OutputView;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -38,7 +35,6 @@ public class InputFoodMenusValidator {
                 .mapToInt(Integer::intValue)
                 .sum();
 
-        System.out.println(foodCount);
         if (foodCount < MIN_FOOD_MENU) {
             throw new InvalidInputException();
         }
