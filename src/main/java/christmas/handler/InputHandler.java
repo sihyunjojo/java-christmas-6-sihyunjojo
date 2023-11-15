@@ -3,9 +3,11 @@ package christmas.handler;
 import static christmas.message.SystemMessage.*;
 import static christmas.validator.InputFoodMenusValidator.*;
 
+import christmas.domain.Order;
 import christmas.global.FoodMenu;
 import christmas.message.ErrorMessage;
 import christmas.util.InputUtil;
+import christmas.validator.EventValidator;
 import christmas.validator.InputDateValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -17,40 +19,53 @@ public class InputHandler {
         OutputView.printMessage(INPUT_DAY);
         while (true) {
             try {
-                String inputDay = InputView.read();
-                InputDateValidator.validateStringDateParseInteger(inputDay);
-
-                int day = InputUtil.StringToInt(inputDay);
-                InputDateValidator.validateInputDayPeriod(day);
-
-                return LocalDate.of(2023, 12, day);
+                return inputDate();
             } catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_DATE);
             }
-
         }
-
     }
 
-    public static Map<FoodMenu, Integer> setFoodMenus(){
-        OutputView.printMessage(INPUT_FOOD_MENUS);
+    private static LocalDate inputDate() {
+        String inputDay = InputView.read();
+        InputDateValidator.validateStringDateParseInteger(inputDay);
 
+        int day = InputUtil.StringToInt(inputDay);
+        InputDateValidator.validateInputDayPeriod(day);
+
+        LocalDate date = LocalDate.of(2023, 12, day);
+        EventValidator.validateDisCountPeriod(date);
+        return date;
+    }
+
+    public static Order setOrder(){
+        OutputView.printMessage(INPUT_FOOD_MENUS);
         while (true) {
             try {
-                String inputFoodMenus = InputView.read();
-                String[] splitFoodMenus = InputUtil.splitStringByComma(inputFoodMenus);
-                validateSplitFoodMenus(splitFoodMenus);
+                Map<FoodMenu, Integer> foodMenus = inputFoodMenus();
 
-                Map<FoodMenu, Integer> foodMenus = InputUtil.StringsToFoodMenus(splitFoodMenus);
-                validateInputFoodMenuCount(foodMenus);
-
-                return foodMenus;
+                return createOrder(foodMenus);
             }
             catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_ORDER);
             }
         }
+    }
 
+    private static Order createOrder(Map<FoodMenu, Integer> foodMenus) {
+        Order order = Order.createOrder(foodMenus);
+        EventValidator.validateOrderFoodCategory(order.getFoodMenus());
+        EventValidator.validateOrderFoodMenuCount(order.getFoodMenuCount());
+        return order;
+    }
 
+    private static Map<FoodMenu, Integer> inputFoodMenus() {
+        String inputFoodMenus = InputView.read();
+        String[] splitFoodMenus = InputUtil.splitStringByComma(inputFoodMenus);
+        validateSplitFoodMenus(splitFoodMenus);
+
+        Map<FoodMenu, Integer> foodMenus = InputUtil.StringsToFoodMenus(splitFoodMenus);
+        validateInputFoodMenuCount(foodMenus);
+        return foodMenus;
     }
 }

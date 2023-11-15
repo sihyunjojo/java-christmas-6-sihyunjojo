@@ -55,7 +55,6 @@ public class OutputHandler {
     }
 
 
-
     public static void outputGiveAwayMenu(GiveAwayProduct giveAwayProduct) {
         OutputView.printMessage(OUTPUT_GIVE_AWAY_MENU);
 

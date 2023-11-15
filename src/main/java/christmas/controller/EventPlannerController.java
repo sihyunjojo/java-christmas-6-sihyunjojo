@@ -18,13 +18,7 @@ public class EventPlannerController {
     public static void planEvent() {
         OutputView.printMessage(HELLO_EVENT_PLANNER);
         LocalDate date = InputHandler.setDate();
-        Map<FoodMenu, Integer> foodMenus = InputHandler.setFoodMenus();
-
-        Order order = Order.createOrder(foodMenus);
-
-        EventValidator.validateDisCountPeriod(date);
-        EventValidator.validateOrderFoodCategory(order.getFoodMenus());
-        EventValidator.validateOrderFoodMenuCount(order.getFoodMenuCount());
+        Order order = InputHandler.setOrder();
 
         EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
 
