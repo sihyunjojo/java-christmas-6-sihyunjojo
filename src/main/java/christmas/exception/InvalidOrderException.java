@@ -7,15 +7,4 @@ public class InvalidOrderException extends IllegalArgumentException {
         super(INVALID_ORDER.getMessage());
     }
 
-    public InvalidOrderException(String s) {
-        super(s);
-    }
-
-    public InvalidOrderException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public InvalidOrderException(Throwable cause) {
-        super(cause);
-    }
 }

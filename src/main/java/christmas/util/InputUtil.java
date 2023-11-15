@@ -4,7 +4,6 @@ import static christmas.util.Util.findFoodMenuByName;
 import static christmas.validator.InputFoodMenusValidator.*;
 
 import christmas.global.FoodMenu;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

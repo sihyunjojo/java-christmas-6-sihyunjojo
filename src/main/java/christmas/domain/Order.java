@@ -7,10 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public record Order(Map<FoodMenu, Integer> foodMenus) {
-    public Order(Map<FoodMenu, Integer> foodMenus) {
-        this.foodMenus = foodMenus;
-    }
-
     public static Order createOrder(Map<FoodMenu, Integer> foodMenus) {
         return new Order(foodMenus);
     }

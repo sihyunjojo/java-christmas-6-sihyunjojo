@@ -6,7 +6,6 @@ import christmas.global.StarredDate;
 import christmas.global.constants.EventValidateConstants;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class BenefitValidator {
     public static boolean isDDayDiscountValid(LocalDate date){
