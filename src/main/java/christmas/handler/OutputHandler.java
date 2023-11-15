@@ -33,7 +33,7 @@ public class OutputHandler {
     private static void outputEventPlannerResult(EventPlanner eventPlanner) {
         outputOrderMenu(eventPlanner.getOrder());
         outputTotalOrderPriceBeforeDiscount(eventPlanner.getOrderPrice());
-//        outputGiveAwayMenu(eventPlanner.getGiveAwayProduct());
+        outputGiveAwayMenu(eventPlanner.getGiveAwayProduct());
         outputBenefitDetail(eventPlanner.getBenefits());
         outputTotalBenefitPrice(eventPlanner.getAllDiscountPrice());
         outputPaymentPriceAfterDiscount(eventPlanner.getDiscountedOrderPrice());
@@ -60,6 +60,7 @@ public class OutputHandler {
     public static void outputTotalOrderPriceBeforeDiscount(int orderPrice) {
         OutputView.printMessage(OUTPUT_TOTAL_ORDER_PRICE_BEFORE_DISCOUNT);
 
+//        String outputOrderPrice = priceToStringMessage(OrderPrice);
         OutputView.printWithBlankLine(setMessage(OUTPUT_PRICE_MESSAGE, orderPrice));
     }
 
