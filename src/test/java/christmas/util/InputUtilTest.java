@@ -8,7 +8,6 @@ import christmas.exception.InvalidInputException;
 import christmas.global.FoodMenu;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -35,10 +34,6 @@ class InputUtilTest {
     @DisplayName("메뉴가 제대로 들어오지 않으면, 예외를 일으킨다.")
     void testStringsToFoodMenusByInvalidInput(String input1, String input2) {
         String[] input = {input1, input2};
-        String menu1 = input1.split("-")[0];
-        String count1 = input1.split("-")[1];
-        String menu2 = input2.split("-")[0];
-        String count2 = input2.split("-")[1];
 
         assertThrows(InvalidInputException.class, () -> StringsToFoodMenus(input));
     }
