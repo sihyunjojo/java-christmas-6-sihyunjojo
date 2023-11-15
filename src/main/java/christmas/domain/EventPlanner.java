@@ -24,9 +24,9 @@ public class EventPlanner {
     private final LocalDate date;
     private final int orderPrice;
     private final Map<BenefitDetail,Benefit> benefits;
-    private GiveAwayProduct giveAwayProduct = null;
+//    private GiveAwayProduct giveAwayProduct = null;
     private final int allDiscountPrice;
-    private int discountedOrderPrice;
+    private final int discountedOrderPrice;
     private final EventBadge eventBadge;
 
     private EventPlanner(Order order, LocalDate date, int orderPrice, Map<BenefitDetail,Benefit> benefits) {
@@ -37,16 +37,16 @@ public class EventPlanner {
         this.allDiscountPrice = setAllDiscountPrice(benefits);
         this.discountedOrderPrice = orderPrice - allDiscountPrice;
         this.eventBadge = EventBadge.determineEventBadge(allDiscountPrice);
-        isNotNullGiveAwayEvent(benefits);
+//        isNotNullGiveAwayEvent(benefits);
     }
 
-    private void isNotNullGiveAwayEvent(Map<BenefitDetail, Benefit> benefits) {
-        GiveAwayEvent giveAwayEvent = (GiveAwayEvent) benefits.get(GIVE_AWAY_EVENT);
-        if (giveAwayEvent != null) {
-            this.giveAwayProduct = giveAwayEvent.getGiveAwayProduct();
-            this.discountedOrderPrice += giveAwayProduct.product().getPrice();
-        }
-    }
+//    private void isNotNullGiveAwayEvent(Map<BenefitDetail, Benefit> benefits) {
+//        GiveAwayEvent giveAwayEvent = (GiveAwayEvent) benefits.get(GIVE_AWAY_EVENT);
+//        if (giveAwayEvent != null) {
+//            this.giveAwayProduct = giveAwayEvent.getGiveAwayProduct();
+//            this.discountedOrderPrice += giveAwayProduct.product().getPrice();
+//        }
+//    }
 
     private static int setAllDiscountPrice(Map<BenefitDetail, Benefit> benefits) {
         int allDiscountPrice = 0;
@@ -125,9 +125,9 @@ public class EventPlanner {
         return benefits;
     }
 
-    public GiveAwayProduct getGiveAwayProduct() {
-        return giveAwayProduct;
-    }
+//    public GiveAwayProduct getGiveAwayProduct() {
+//        return giveAwayProduct;
+//    }
 
     public int getAllDiscountPrice() {
         return allDiscountPrice;
@@ -152,13 +152,13 @@ public class EventPlanner {
         EventPlanner that = (EventPlanner) o;
         return orderPrice == that.orderPrice && allDiscountPrice == that.allDiscountPrice
                 && discountedOrderPrice == that.discountedOrderPrice && Objects.equals(order, that.order)
-                && Objects.equals(date, that.date) && Objects.equals(benefits, that.benefits)
-                && Objects.equals(giveAwayProduct, that.giveAwayProduct) && eventBadge == that.eventBadge;
+                && Objects.equals(date, that.date) && Objects.equals(benefits, that.benefits);
+//                && Objects.equals(giveAwayProduct, that.giveAwayProduct) && eventBadge == that.eventBadge;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(order, date, orderPrice, benefits, giveAwayProduct, allDiscountPrice, discountedOrderPrice,
+        return Objects.hash(order, date, orderPrice, benefits, allDiscountPrice, discountedOrderPrice,
                 eventBadge);
     }
 }

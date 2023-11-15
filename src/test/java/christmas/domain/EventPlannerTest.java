@@ -34,7 +34,7 @@ class EventPlannerTest {
         assertEquals(date, eventPlanner.getDate());
         assertEquals(order.getOrderPrice(), eventPlanner.getOrderPrice());
         assertNotNull(eventPlanner.getBenefits());
-        assertNotNull(eventPlanner.getGiveAwayProduct());
+//        assertNotNull(eventPlanner.getGiveAwayProduct());
         assertTrue(eventPlanner.getAllDiscountPrice() >= 0);
         assertTrue(eventPlanner.getDiscountedOrderPrice() >= 0);
         assertNotNull(eventPlanner.getEventBadge());
@@ -60,7 +60,7 @@ class EventPlannerTest {
         assertEquals(date, eventPlanner.getDate());
         assertEquals(order.getOrderPrice(), eventPlanner.getOrderPrice());
         assertTrue(eventPlanner.getBenefits().isEmpty());
-        assertNull(eventPlanner.getGiveAwayProduct());
+//        assertNull(eventPlanner.getGiveAwayProduct());
         assertEquals(0, eventPlanner.getAllDiscountPrice());
         assertTrue(eventPlanner.getDiscountedOrderPrice() >= 0);
         assertEquals(eventPlanner.getEventBadge(), EventBadge.no);

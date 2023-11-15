@@ -33,7 +33,7 @@ public class OutputHandler {
     private static void outputEventPlannerResult(EventPlanner eventPlanner) {
         outputOrderMenu(eventPlanner.getOrder());
         outputTotalOrderPriceBeforeDiscount(eventPlanner.getOrderPrice());
-        outputGiveAwayMenu(eventPlanner.getGiveAwayProduct());
+//        outputGiveAwayMenu(eventPlanner.getGiveAwayProduct());
         outputBenefitDetail(eventPlanner.getBenefits());
         outputTotalBenefitPrice(eventPlanner.getAllDiscountPrice());
         outputPaymentPriceAfterDiscount(eventPlanner.getDiscountedOrderPrice());
