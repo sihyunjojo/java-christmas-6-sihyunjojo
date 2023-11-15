@@ -4,6 +4,7 @@ import static christmas.global.constants.DiscountDateConstants.*;
 import static christmas.message.SystemMessage.*;
 import static christmas.validator.InputFoodMenusValidator.*;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Order;
 import christmas.global.FoodMenu;
 import christmas.message.ErrorMessage;
@@ -25,7 +26,7 @@ public class InputHandler {
                 OutputView.printMessage(ErrorMessage.INVALID_DATE);
             }
 //        }
-        return null;
+        return inputDate();
     }
 
     private static LocalDate inputDate() {
