@@ -10,6 +10,10 @@ public class OutputView {
     public static void printMessage(MessageProvider message) {
         System.out.println(message.getMessage());
     }
+    public static void printMessageWithBlankLine(MessageProvider message) {
+        System.out.println(message.getMessage());
+        printMessageBlankLine();
+    }
     public static <T> void print(T message){
         System.out.println(message);
     }
