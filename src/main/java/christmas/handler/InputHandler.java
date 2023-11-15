@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class InputHandler {
     public static LocalDate setDate(){
-        OutputView.printMessage(INPUT_DAY);
         while (true) {
             try {
+                OutputView.printMessage(INPUT_DAY);
                 return inputDate();
             } catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_DATE);
@@ -41,9 +41,9 @@ public class InputHandler {
     }
 
     public static Order setOrder(){
-        OutputView.printMessage(INPUT_FOOD_MENUS);
         while (true) {
             try {
+                OutputView.printMessage(INPUT_FOOD_MENUS);
                 return createOrder(inputFoodMenus());
             }
             catch (IllegalArgumentException e) {
