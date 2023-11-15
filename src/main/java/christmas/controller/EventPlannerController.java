@@ -3,6 +3,7 @@ package christmas.controller;
 
 import static christmas.message.SystemMessage.*;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.EventPlanner;
 import christmas.domain.Order;
 import christmas.handler.OutputHandler;
@@ -20,5 +21,6 @@ public class EventPlannerController {
         EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
 
         OutputHandler.outputEventPlanner(eventPlanner);
+        Console.close();
     }
 }
