@@ -29,7 +29,7 @@ public class WeekdayDiscount extends Benefit {
                 .filter(foodMenu -> foodMenu.getKey()
                         .getCategory()
                         .equals("Dessert"))
-                .mapToInt(mainMenu -> (mainMenu.getValue() *  WEEKDAY_DISCOUNT_PRICE))
+                .mapToInt(dessertMenu -> (dessertMenu.getValue() *  WEEKDAY_DISCOUNT_PRICE))
                 .sum();
     }
 
