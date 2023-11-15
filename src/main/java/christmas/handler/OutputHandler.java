@@ -107,8 +107,6 @@ public class OutputHandler {
         int benefitPrice = benefit.getValue().getBenefitPrice();
 
         if (benefitPrice != 0) {
-//            String outputBenefitPrice = priceToStringMessage(benefitPrice);
-//            String outputBenefit = setBenefitMessage(benefitName, outputBenefitPrice);
             String outputBenefit = setMessage(OUTPUT_BENEFIT_MESSAGE,benefitName,benefitPrice);
             outputBenefits.add(outputBenefit);
         }

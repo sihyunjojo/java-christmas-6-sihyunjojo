@@ -18,6 +18,7 @@ public class DDayDiscount extends Benefit {
     }
 
     public static DDayDiscount createDDayDiscount(LocalDate date){
+
         return new DDayDiscount(date);
     }
 
