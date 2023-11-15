@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public class EventPlannerController {
     public static void planEvent() {
         OutputView.printMessage(HELLO_EVENT_PLANNER);
-        LocalDate date = InputHandler.setDate();
-        Order order = InputHandler.setOrder();
+//        LocalDate date = InputHandler.setDate();
+//        Order order = InputHandler.setOrder();
 
 //        EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
 
