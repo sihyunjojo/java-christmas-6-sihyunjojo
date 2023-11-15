@@ -64,25 +64,47 @@ public class EventPlanner {
             return new EventPlanner(order, date, orderPrice, benefits);
         }
 
-        if (BenefitValidator.isSpecialDiscountValid(date)) {
-            benefits.put(SPECIAL_DISCOUNT,SpecialDiscount.createSpecialDiscount());
-        }
-        if (BenefitValidator.isGiveAwayEventValid(date,orderPrice)) {
-            GiveAwayProduct giveAwayProduct = GiveAwayProduct.createGiveAwayProduct(FoodMenu.CHAMPAGNE, 1);
-            benefits.put(GIVE_AWAY_EVENT,GiveAwayEvent.createGiveAwayEvent(giveAwayProduct));
-        }
-        if (BenefitValidator.isWeekendDiscountValid(date)) {
-            benefits.put(WEEKEND_DISCOUNT,WeekendDiscount.createWeekendDiscount(order));
-        }
-        if (BenefitValidator.isWeekdayDiscountValid(date)){
-            benefits.put(WEEKDAY_DISCOUNT,WeekdayDiscount.createWeekdayDiscount(order));
-        }
+        determineBenefits(order, date, benefits, orderPrice);
+        return new EventPlanner(order, date, orderPrice, benefits);
+    }
+
+    private static void determineBenefits(Order order, LocalDate date, Map<BenefitDetail, Benefit> benefits, int orderPrice) {
+        determineAddSpecialDiscount(date, benefits);
+        determineAddGiveAwayEvent(date, orderPrice, benefits);
+        determineAddWeekendDiscount(order, date, benefits);
+        determineAddWeekdayDiscount(order, date, benefits);
+        determineAddDDayDiscount(date, benefits);
+    }
+
+    private static void determineAddDDayDiscount(LocalDate date, Map<BenefitDetail, Benefit> benefits) {
         if (BenefitValidator.isDDayDiscountValid(date)) {
             benefits.put(D_DAY_DISCOUNT,DDayDiscount.createDDayDiscount(date));
         }
+    }
 
+    private static void determineAddWeekdayDiscount(Order order, LocalDate date, Map<BenefitDetail, Benefit> benefits) {
+        if (BenefitValidator.isWeekdayDiscountValid(date)){
+            benefits.put(WEEKDAY_DISCOUNT,WeekdayDiscount.createWeekdayDiscount(order));
+        }
+    }
 
-        return new EventPlanner(order, date, orderPrice, benefits);
+    private static void determineAddWeekendDiscount(Order order, LocalDate date, Map<BenefitDetail, Benefit> benefits) {
+        if (BenefitValidator.isWeekendDiscountValid(date)) {
+            benefits.put(WEEKEND_DISCOUNT,WeekendDiscount.createWeekendDiscount(order));
+        }
+    }
+
+    private static void determineAddGiveAwayEvent(LocalDate date, int orderPrice, Map<BenefitDetail, Benefit> benefits) {
+        if (BenefitValidator.isGiveAwayEventValid(date, orderPrice)) {
+            GiveAwayProduct giveAwayProduct = GiveAwayProduct.createGiveAwayProduct(FoodMenu.CHAMPAGNE, 1);
+            benefits.put(GIVE_AWAY_EVENT,GiveAwayEvent.createGiveAwayEvent(giveAwayProduct));
+        }
+    }
+
+    private static void determineAddSpecialDiscount(LocalDate date, Map<BenefitDetail, Benefit> benefits) {
+        if (BenefitValidator.isSpecialDiscountValid(date)) {
+            benefits.put(SPECIAL_DISCOUNT,SpecialDiscount.createSpecialDiscount());
+        }
     }
 
 
