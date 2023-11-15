@@ -19,10 +19,18 @@ import java.util.Map.Entry;
 public class OutputHandler {
 
     public static void outputEventPlanner(EventPlanner eventPlanner) {
-        int day = eventPlanner.getDate().getDayOfMonth();
-        String outputBenefitInformation = String.format(INPUT_BENEFIT_INFORMATION.getMessage(), day);
+        String outputBenefitInformation = makeBenefitInformationMessage(eventPlanner);
         OutputView.printWithBlankLine(outputBenefitInformation);
 
+        outputEventPlannerResult(eventPlanner);
+    }
+
+    private static String makeBenefitInformationMessage(EventPlanner eventPlanner) {
+        int day = eventPlanner.getDate().getDayOfMonth();
+        return String.format(INPUT_BENEFIT_INFORMATION.getMessage(), day);
+    }
+
+    private static void outputEventPlannerResult(EventPlanner eventPlanner) {
         outputOrderMenu(eventPlanner.getOrder());
         outputTotalOrderPriceBeforeDiscount(eventPlanner.getOrderPrice());
         outputGiveAwayMenu(eventPlanner.getGiveAwayProduct());
@@ -31,20 +39,29 @@ public class OutputHandler {
         outputPaymentPriceAfterDiscount(eventPlanner.getDiscountedOrderPrice());
         outputDecemberEventBadge(eventPlanner.getEventBadge());
     }
+
     public static void outputOrderMenu(Order order) {
         OutputView.printMessage(OUTPUT_ORDER_MENU);
         Map<FoodMenu, Integer> foodMenus = order.foodMenus();
+
         List<String> outputFoodMenus = new ArrayList<>();
-
-        for (Entry<FoodMenu, Integer> foodMenu : foodMenus.entrySet()) {
-            String foodName = foodMenu.getKey().getName();
-            Integer foodCount = foodMenu.getValue();
-
-            String outputFoodMenu = foodName + " " + foodCount + "개";
-            outputFoodMenus.add(outputFoodMenu);
-        }
+        addOutputFoodMenus(foodMenus, outputFoodMenus);
 
         OutputView.printMessagesWithBlankLine(outputFoodMenus);
+    }
+
+    private static void addOutputFoodMenus(Map<FoodMenu, Integer> foodMenus, List<String> outputFoodMenus) {
+        for (Entry<FoodMenu, Integer> foodMenu : foodMenus.entrySet()) {
+            String outputFoodMenu = setFoodMenuMessage(foodMenu);
+            outputFoodMenus.add(outputFoodMenu);
+        }
+    }
+
+    private static String setFoodMenuMessage(Entry<FoodMenu, Integer> foodMenu) {
+        String foodName = foodMenu.getKey().getName();
+        Integer foodCount = foodMenu.getValue();
+
+        return setMenuNameAndCountMessage(foodName, foodCount);
     }
 
     public static void outputTotalOrderPriceBeforeDiscount(int OrderPrice) {
@@ -58,26 +75,31 @@ public class OutputHandler {
     public static void outputGiveAwayMenu(GiveAwayProduct giveAwayProduct) {
         OutputView.printMessage(OUTPUT_GIVE_AWAY_MENU);
 
-        if (giveAwayProduct != null) {
-            String giveAwayProductName = giveAwayProduct.product().getName();
-            int giveAwayProductCount = giveAwayProduct.count();
-
-            String outputGiveAwayProduct = giveAwayProductName + " " + giveAwayProductCount + "개";
-            OutputView.printWithBlankLine(outputGiveAwayProduct);
+        if (giveAwayProduct == null) {
+            OutputView.printMessageWithBlankLine(OUTPUT_NOTHING);
             return;
         }
-        OutputView.printWithBlankLine("없음");
+        String outputGiveAwayProduct = setGiveAwayProductMessage(giveAwayProduct);
+        OutputView.printWithBlankLine(outputGiveAwayProduct);
     }
+
+    private static String setGiveAwayProductMessage(GiveAwayProduct giveAwayProduct) {
+        String giveAwayProductName = giveAwayProduct.product().getName();
+        int giveAwayProductCount = giveAwayProduct.count();
+
+        return setMenuNameAndCountMessage(giveAwayProductName, giveAwayProductCount);
+    }
+
 
     public static void outputBenefitDetail(Map<BenefitDetail, Benefit> benefits) {
         OutputView.printMessage(OUTPUT_BENEFIT_DETAIL);
         List<String> outputBenefits = new ArrayList<>();
 
-        if (!benefits.isEmpty()) {
-            outputBenefits(benefits, outputBenefits);
+        if (benefits.isEmpty()) {
+            OutputView.printMessageWithBlankLine(OUTPUT_NOTHING);
             return;
         }
-        OutputView.printWithBlankLine("없음");
+        outputBenefits(benefits, outputBenefits);
     }
 
     private static void outputBenefits(Map<BenefitDetail, Benefit> benefits, List<String> outputBenefits) {
@@ -85,7 +107,7 @@ public class OutputHandler {
             addOutputBenefit(benefit, outputBenefits);
         }
         if (outputBenefits.isEmpty()) {
-            OutputView.printWithBlankLine("없음");
+            OutputView.printMessageWithBlankLine(OUTPUT_NOTHING);
             return;
         }
         OutputView.printMessagesWithBlankLine(outputBenefits);
@@ -97,36 +119,33 @@ public class OutputHandler {
 
         if (benefitPrice != 0) {
             String outputBenefitPrice = priceToString(benefitPrice);
-            String outputBenefit = benefitName + ": -" + outputBenefitPrice;
+            String outputBenefit = setBenefitMessage(benefitName, outputBenefitPrice);
             outputBenefits.add(outputBenefit);
         }
     }
 
+
     public static void outputTotalBenefitPrice(int totalBenefitPrice) {
         OutputView.printMessage(OUTPUT_TOTAL_BENEFIT_PRICE);
-        if (totalBenefitPrice != 0) {
-            String outputBenefitPrice = priceToString(totalBenefitPrice);
-            OutputView.printWithBlankLine("-" + outputBenefitPrice);
+        String outputBenefitPrice = priceToString(totalBenefitPrice);
+
+        if (totalBenefitPrice == 0) {
+            OutputView.printWithBlankLine(outputBenefitPrice);
             return;
         }
-        OutputView.printWithBlankLine("0원");
+        OutputView.printWithBlankLine(setMinusPriceMessage(outputBenefitPrice));
     }
+
+
 
     public static void outputPaymentPriceAfterDiscount(int discountedOrderPrice) {
         OutputView.printMessage(OUTPUT_PAYMENT_PRICE_AFTER_DISCOUNT);
-
-        if (discountedOrderPrice != 0) {
-            String outputDisCountedOrderPrice = priceToString(discountedOrderPrice);
-            OutputView.printWithBlankLine(outputDisCountedOrderPrice);
-            return;
-        }
-        OutputView.printWithBlankLine("0원");
-
+        String outputDisCountedOrderPrice = priceToString(discountedOrderPrice);
+        OutputView.printWithBlankLine(outputDisCountedOrderPrice);
     }
 
     public static void outputDecemberEventBadge(EventBadge badge) {
         OutputView.printMessage(OUTPUT_DECEMBER_EVENT_BADGE);
-
         OutputView.printWithBlankLine(badge.getName());
     }
 }

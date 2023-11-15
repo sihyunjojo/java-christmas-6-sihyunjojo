@@ -42,9 +42,7 @@ public class InputHandler {
         OutputView.printMessage(INPUT_FOOD_MENUS);
         while (true) {
             try {
-                Map<FoodMenu, Integer> foodMenus = inputFoodMenus();
-
-                return createOrder(foodMenus);
+                return createOrder(inputFoodMenus());
             }
             catch (IllegalArgumentException e) {
                 OutputView.printMessage(ErrorMessage.INVALID_ORDER);
@@ -61,6 +59,7 @@ public class InputHandler {
 
     private static Map<FoodMenu, Integer> inputFoodMenus() {
         String inputFoodMenus = InputView.read();
+
         String[] splitFoodMenus = InputUtil.splitStringByComma(inputFoodMenus);
         validateSplitFoodMenus(splitFoodMenus);
 
