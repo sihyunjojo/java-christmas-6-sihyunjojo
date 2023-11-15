@@ -25,7 +25,7 @@ public class InputFoodMenusValidator {
     public static void validateInputMenuInFoodMenu(String menu) {
         if (Arrays.stream(FoodMenu.values())
                 .noneMatch(foodMenu -> foodMenu.getName().equals(menu))) {
-            throw new InvalidInputException();
+            throw new InvalidOrderException();
         }
     }
 
@@ -36,7 +36,7 @@ public class InputFoodMenusValidator {
                 .sum();
 
         if (foodCount < MIN_FOOD_MENU) {
-            throw new InvalidInputException();
+            throw new InvalidOrderException();
         }
     }
     public static void validateSplitFoodMenus(String[] splitFoodMenus){
