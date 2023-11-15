@@ -1,13 +1,10 @@
 package christmas.domain;
 
 import static christmas.domain.GiveAwayProduct.createGiveAwayProduct;
-import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.domain.event.GiveAwayEvent;
 import christmas.global.FoodMenu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

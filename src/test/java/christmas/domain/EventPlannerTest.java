@@ -7,7 +7,6 @@ import christmas.global.FoodMenu;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

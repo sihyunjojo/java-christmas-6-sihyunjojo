@@ -4,7 +4,6 @@ import static christmas.util.InputUtil.*;
 import static christmas.util.Util.findFoodMenuByName;
 import static org.junit.jupiter.api.Assertions.*;
 
-import christmas.exception.InvalidInputException;
 import christmas.exception.InvalidOrderException;
 import christmas.global.FoodMenu;
 import java.util.Map;

@@ -1,12 +1,10 @@
 package christmas.domain;
 
 import static christmas.global.FoodMenu.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.global.FoodMenu;
 import java.util.HashMap;
 import java.util.Map;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

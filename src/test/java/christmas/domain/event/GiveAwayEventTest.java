@@ -2,7 +2,6 @@ package christmas.domain.event;
 
 import static christmas.domain.GiveAwayProduct.createGiveAwayProduct;
 
-
 import christmas.domain.GiveAwayProduct;
 import christmas.global.FoodMenu;
 import org.junit.jupiter.api.Assertions;
