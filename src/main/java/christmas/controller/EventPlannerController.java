@@ -18,9 +18,9 @@ public class EventPlannerController {
         LocalDate date = InputHandler.setDate();
         Order order = InputHandler.setOrder();
 
-        EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
+//        EventPlanner eventPlanner = EventPlanner.createEventPlanner(order, date);
 
-        OutputHandler.outputEventPlanner(eventPlanner);
+//        OutputHandler.outputEventPlanner(eventPlanner);
         Console.close();
     }
 }
