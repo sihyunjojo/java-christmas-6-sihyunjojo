@@ -34,26 +34,27 @@ public class EventPlanner {
         this.date = date;
         this.orderPrice = orderPrice;
         this.benefits = benefits;
+        this.allDiscountPrice = setAllDiscountPrice(benefits);
+        this.discountedOrderPrice = orderPrice - allDiscountPrice;
+        this.eventBadge = EventBadge.determineEventBadge(allDiscountPrice);
+        isNotNullGiveAwayEvent(benefits);
+    }
 
+    private void isNotNullGiveAwayEvent(Map<BenefitDetail, Benefit> benefits) {
         GiveAwayEvent giveAwayEvent = (GiveAwayEvent) benefits.get(GIVE_AWAY_EVENT);
         if (giveAwayEvent != null) {
             this.giveAwayProduct = giveAwayEvent.getGiveAwayProduct();
+            this.discountedOrderPrice += giveAwayProduct.product().getPrice();
         }
+    }
 
+    private static int setAllDiscountPrice(Map<BenefitDetail, Benefit> benefits) {
         int allDiscountPrice = 0;
         for (Benefit value : benefits.values()) {
             allDiscountPrice += value.getBenefitPrice();
         }
-        this.allDiscountPrice = allDiscountPrice;
-
-        this.discountedOrderPrice = orderPrice - allDiscountPrice;
-        if (giveAwayEvent != null) {
-            this.discountedOrderPrice += giveAwayProduct.product().getPrice();
-        }
-
-        this.eventBadge = EventBadge.determineEventBadge(allDiscountPrice);
+        return allDiscountPrice;
     }
-
 
 
     public static EventPlanner createEventPlanner(Order order, LocalDate date) {
